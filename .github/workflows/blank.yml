@@ -31,7 +31,7 @@ jobs:
         run: yarn laoban compile
 
       - name: Test
-        run: yarn coverage
+        run: yarn coveragesh # Runs on linux. If on windows it would be yarn coverage
 
       - name: Test counts
         run: |
