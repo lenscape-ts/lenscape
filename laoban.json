@@ -117,7 +117,7 @@
       "commands": [
         {
           "guard": "${packageDetails.guards.test}",
-          "command": "jq -c \"{numTotalTestSuites, numTotalTests, numFailedTests}\" coverage\\jest-result.json"
+          "command": "jq -c \"{numTotalTestSuites, numTotalTests, numFailedTests}\" coverage/jest-result.json"
         }
       ]
     },
