@@ -1,0 +1,135 @@
+{
+  "packageManager": "yarn",
+  "parents":        [
+    "@laoban@/laoban.json/core.laoban.json",
+    "@laoban@/laoban.json/javascript.laoban.json",
+    "@laoban@/laoban.json/typescript.laoban.json",
+    "@laoban@/laoban.json/typescript.publish.laoban.json",
+    "@laoban@/laoban.json/react.laoban.json"
+  ],
+  "properties":     {
+    "axios":         "1.7.2",
+    "license":       "MIT",
+    "repository":    "git@github.com:intellimaintain/intellimaintain.git",
+    "laobanVersion": "1.4.51",
+    "focusonVersion": "1.44.3",
+    "itsmworkbench": "0.3.12",
+    "xlsx":          "^0.18.5",
+    "cheerio":       "^1.0.0-rc.12",
+    "openapi":         "4.58.1",
+    "react":         "18.3.1",
+    "react-dom":     "18.3.1",
+    "xml2js":          "^0.6.2"
+  },
+  "templates":      {
+    "typescript":    "templates/typescript",
+    "react":         "templates/react",
+    "react_library": "templates/react_library"
+  },
+  "defaultEnv":     {
+    "NPM_TOKEN": ""
+  },
+  "scripts":        {
+    "ls-react": {
+      "description": "Lists all the react projects",
+      "commands":    [
+        {
+          "guard":   "${packageDetails.guards.react}",
+          "command": "js:process.cwd()"
+        }
+      ]
+    },
+    "ls-build": {
+      "description": "Lists all the  projects that will be built",
+      "commands":    [
+        {
+          "guard":   "${packageDetails.guards.react}",
+          "command": "js:process.cwd()"
+        }
+      ]
+    },
+    "build":    {
+      "description": "Packages the react projects",
+      "commands":    [
+        {
+          "guard":   "${packageDetails.guards.react}",
+          "command": "yarn run build"
+        }
+      ]
+    },
+    "rmDist": {
+      "description": "Removes the dist directories",
+      "commands": ["file:rmDir(dist)"]
+    },
+    "rmNodeModules": {
+      "description": "Removes the node_modules directories",
+      "commands": ["file:rmDir(node_modules)"]
+    },
+    "rmCoverage": {
+      "description": "Removes the coverage directories",
+      "commands": ["file:rmDir(coverage)"]
+    },
+    "coverage": {
+      "description": "Runs the coverage for the  projects marked as 'test'",
+      "commands": [
+        {
+          "guard": "${packageDetails.guards.test}",
+          "command": "yarn run test --coverage --coverageDirectory=coverage --outputFile coverage/jest-result.json --json",
+          "status": true
+        }
+      ]
+    },
+    "coverage-copy": {
+      "description": "Copies the data to the coverage directory",
+      "inLinksOrder": true,
+      "commands": [
+        "file:mkdir(${laobanDirectory}/coverage)",
+        "file:mkdir(${laobanDirectory}/testcount)",
+        {
+          "guard": "${packageDetails.guards.test}",
+          "command": "copy coverage\\coverage-final.json ${laobanDirectory}\\coverage\\${packageDetails.name|forwardSlashToDot}.json"
+        },
+        {
+          "guard": "${packageDetails.guards.test}",
+          "command": "copy coverage\\jest-result.json ${laobanDirectory}\\testcount\\${packageDetails.name|forwardSlashToDot}.json"
+        }
+      ]
+    },
+    "coverage-copy-sh": {
+      "description": "Copies the data to the coverage directory (mac and lynux)",
+      "inLinksOrder": true,
+      "commands": [
+        "file:mkdir(${laobanDirectory}/coverage)",
+        "file:mkdir(${laobanDirectory}/testcount)",
+        {
+          "guard": "${packageDetails.guards.test}",
+          "command": "cp coverage/coverage-final.json ${laobanDirectory}/coverage/${packageDetails.name|forwardSlashToDot}.json"
+        },
+        {
+          "guard": "${packageDetails.guards.test}",
+          "command": "cp coverage/jest-result.json ${laobanDirectory}/testcount/${packageDetails.name|forwardSlashToDot}.json"
+        }
+      ]
+    },
+    "testcount": {
+      "description": "How many tests?",
+      "inLinksOrder": true,
+      "commands": [
+        {
+          "guard": "${packageDetails.guards.test}",
+          "command": "jq -c \"{numTotalTestSuites, numTotalTests, numFailedTests}\" coverage\\jest-result.json"
+        }
+      ]
+    },
+    "testcountcolumns": {
+      "description": "How many tests?",
+      "inLinksOrder": true,
+      "commands": [
+        {
+          "guard": "${packageDetails.guards.test}",
+          "command": "jq -r -c \"[(\\\"${packageDetails.name|forwardSlashToDot}\\\" + (\\\" \\\" * (40 - (\\\"${packageDetails.name|forwardSlashToDot}\\\" | length)))), .numTotalTestSuites, .numTotalTests, .numFailedTests]|@tsv\" coverage\\jest-result.json"
+        }
+      ]
+    }
+  }
+}

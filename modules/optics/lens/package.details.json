@@ -1,0 +1,21 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/lens",
+  "description": "A simple implementation of optics and turning them into/from paths",
+  "packageJson": {
+    "files": ["build/"],
+    "dependencies": {
+    },
+    "devDependencies": {
+
+    },
+    "links": [
+    ]
+  },
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true,
+    "react": false
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/errors",
+  "description": "How errors are represented",
+  "links": [
+    "@lenscape/records"
+  ],
+  "packageJson": {
+    "files": ["build/"],
+    "dependencies": {
+    },
+    "devDependencies": {
+
+    },
+    "scripts": {"start": "react-scripts start"}
+  },
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true,
+    "react": false
+  }
+}

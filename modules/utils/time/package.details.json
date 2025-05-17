@@ -1,0 +1,18 @@
+{
+  "template": "react_library",
+  "name": "@lenscape/time",
+  "description": "A timeservice for the me@eon project",
+  "packageJson": {
+    "dependencies": {
+    },
+    "devDependencies": {
+    }
+  },
+  "links": [
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true
+  }
+}

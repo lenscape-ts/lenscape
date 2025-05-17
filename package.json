@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "workspaces": [
+    "modules/**"
+  ],
+  "name": "lenscape",
+  "description": "This is the 'master project' with many child projects. There is no code in this project: it is all managed in child projects",
+  "keywords": [
+    "functionalprogramming",
+    "state management",
+    "lens",
+    "optics"
+  ],
+  "license": "MIT",
+  "repository": " git@github.com:lenscape-ts/lenscape.git",
+  "scripts": {
+    "cycles": "madge --circular --extensions ts,tsx --json --exclude node_modules .",
+    "coverage": "yarn coverage:run && yarn coverage:copy && yarn coverage:report",
+    "coverage:run": "laoban coverage",
+    "coverage:copy": "laoban coverage-copy ",
+    "coverage:report": "nyc report --reporter=html --report-dir=./coverage --temp-dir=coverage",
+    "coverage:open": "open-cli coverage/index.html"
+  },
+  "author": "phil <phil.rice@validoc.org>",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "madge": "^8.0.0",
+    "nyc": "^17.1.0",
+    "open-cli": "^8.0.0"
+  },
+  "resolutions": {
+    "//": "See https://github.com/facebook/create-react-app/issues/11773",
+    "react-error-overlay": "6.0.9"
+  }
+}

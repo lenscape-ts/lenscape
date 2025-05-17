@@ -1,0 +1,20 @@
+{
+  "template": "react_library",
+  "name": "@lenscape/codec",
+  "description": "Coders and decoders for the me@eon project",
+  "packageJson": {
+    "dependencies": {
+    },
+    "devDependencies": {
+    }
+  },
+  "links": [
+    "@lenscape/errors",
+    "@lenscape/validate"
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true
+  }
+}

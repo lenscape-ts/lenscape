@@ -1,0 +1,17 @@
+.idea/
+venv
+node_modules/
+.parcel-cache/
+.pace
+coverage/
+build/
+dist/
+.profile
+.log.json
+.status
+.log
+.session/
+testcount/
+.parcel-output/
+Icov-report/
+*.iml
