@@ -20,7 +20,9 @@
     "coverage:copy": "yarn laoban coverage-copy ",
     "coverage:report": "nyc report --reporter=html --report-dir=./coverage --temp-dir=coverage",
     "coverage:open": "open-cli coverage/index.html",
-    "laoban": "laoban"
+    "laoban": "laoban",
+    "test:count": "laoban testcount",
+    "test:allcount": "laoban testcount | jq -s \"{packagesWithTests: length, totalNumTotalTestSuites: map(.numTotalTestSuites) | add, totalNumTotalTests: map(.numTotalTests) | add, totalNumFailedTests: map(.numFailedTests) | add}\""
   },
   "author": "phil <phil.rice@validoc.org>",
   "dependencies": {

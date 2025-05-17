@@ -31,7 +31,18 @@ jobs:
         run: yarn laoban compile
 
       - name: Test
-        run: yarn laoban test
+        run: yarn coverage
+
+      - name: Test counts
+        run: |
+           yarn test:count
+           yarn test:allcount
 
       - name: Laoban Status # Will fail if any of the major actions has failed
         run: yarn laoban status
+
+      - name: Upload Coverage Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-node-${{ matrix.node-version }}
+          path: coverage/
