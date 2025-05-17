@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install Dependencies
+        run: yarn install --immutable
+
+      - name: Compile
+        run: yarn laoban compile
+
+      - name: Test
+        run: yarn laoban test
+
+      - name: Laoban Status # Will fail if any of the major actions has failed
+        run: yarn laoban status
