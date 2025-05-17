@@ -16,10 +16,11 @@
   "scripts": {
     "cycles": "madge --circular --extensions ts,tsx --json --exclude node_modules .",
     "coverage": "yarn coverage:run && yarn coverage:copy && yarn coverage:report",
-    "coverage:run": "laoban coverage",
-    "coverage:copy": "laoban coverage-copy ",
+    "coverage:run": "yarn laoban coverage",
+    "coverage:copy": "yarn laoban coverage-copy ",
     "coverage:report": "nyc report --reporter=html --report-dir=./coverage --temp-dir=coverage",
-    "coverage:open": "open-cli coverage/index.html"
+    "coverage:open": "open-cli coverage/index.html",
+    "laoban": "laoban"
   },
   "author": "phil <phil.rice@validoc.org>",
   "dependencies": {
@@ -27,7 +28,8 @@
   "devDependencies": {
     "madge": "^8.0.0",
     "nyc": "^17.1.0",
-    "open-cli": "^8.0.0"
+    "open-cli": "^8.0.0",
+    "laoban": "^1.4.58"
   },
   "resolutions": {
     "//": "See https://github.com/facebook/create-react-app/issues/11773",
