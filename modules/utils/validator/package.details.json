@@ -1,7 +1,7 @@
 {
-  "template": "react_library",
+  "template": "typescript",
   "name": "@lenscape/validate",
-  "description": "Validation for the me@eon project",
+  "description": "Validation for the @lenscape project",
   "packageJson": {
     "dependencies": {
     },

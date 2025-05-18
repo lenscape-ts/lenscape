@@ -27,9 +27,16 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies":  {
-    "@babel/preset-react": "^7.23.3",
+    "react":     "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
+    "@testing-library/react":  "^15.0.6",
     "@types/react":        "^18.2.56",
     "@types/react-dom":    "^18.2.19",
+    "jest-environment-jsdom": "^29.7.0",
     "parcel":              "^2.11.0",
     "typescript":          "^5.3.3"
   },

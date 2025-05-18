@@ -1,0 +1,81 @@
+{
+  "name": "@lenscape/react_storage",
+  "description": "allows long term storage of data in a style similar to useState using 'instant' storage such as localstorage or cookiestorage",
+  "version": "0.1.0",
+  "browserslist": {
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ]
+  },
+  "dependencies": {
+    "@lenscape/partial_functions": "0.1.0",
+    "@lenscape/storage": "0.1.0",
+    "@lenscape/string_utils": "0.1.0",
+    "debug": "^4.3.4",
+    "@focuson/lens": "1.44.3",
+    "@focuson/state": "1.44.3",
+    "@laoban/utils": "1.4.45"
+  },
+  "devDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
+    "@testing-library/react": "^15.0.6",
+    "@types/react": "^18.2.56",
+    "@types/react-dom": "^18.2.19",
+    "jest-environment-jsdom": "^29.7.0",
+    "parcel": "^2.11.0",
+    "typescript": "^5.3.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
+  },
+  "files": [
+    "build/",
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/src/",
+    "build/"
+  ],
+  "keywords": [
+    "react",
+    "runbook"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "repository": "git@github.com:intellimaintain/intellimaintain.git",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html",
+    "test": "jest --config jest.config.json",
+    "test:watch": "npm run test -- --watch",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  }
+}

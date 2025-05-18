@@ -1,7 +1,7 @@
 {
-  "template": "react_library",
+  "template": "typescript",
   "name": "@lenscape/codec",
-  "description": "Coders and decoders for the me@eon project",
+  "description": "Coders and decoders for the @lenscape project",
   "packageJson": {
     "dependencies": {
     },

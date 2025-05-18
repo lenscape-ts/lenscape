@@ -1,7 +1,7 @@
 {
-  "template": "react_library",
+  "template": "typescript",
   "name": "@lenscape/time",
-  "description": "A timeservice for the me@eon project",
+  "description": "A timeservice for the @lenscape project",
   "packageJson": {
     "dependencies": {
     },

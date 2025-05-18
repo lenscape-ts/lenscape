@@ -1,0 +1,21 @@
+{
+  "template": "react_library",
+  "name": "@lenscape/context",
+  "description": "Context utilities for the @lenscape project",
+  "packageJson": {
+    "dependencies": {
+    },
+    "devDependencies": {
+      "@lenscape/test_utils": "${version}"
+    }
+  },
+  "links": [
+    "@lenscape/lens",
+    "@lenscape/string_utils"
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true
+  }
+}

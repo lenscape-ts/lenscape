@@ -1,4 +1,10 @@
-import { camelCase, camelCaseToWords, capitalizeFirstLetter, ellipsesInMiddle, nameWithOptions, parseAttributeValue } from "./strings.utilities";
+import {
+    camelCase,
+    camelCaseToWords,
+    capitalizeFirstLetter,
+    ellipsesInMiddle,
+    nameWithOptions, parseAttributeValue
+} from "./strings.utilities";
 
 describe("camelCaseToWords", () => {
     it("converts simple camelCase strings to words", () => {

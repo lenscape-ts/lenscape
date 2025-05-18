@@ -1,7 +1,7 @@
 {
-  "template": "react_library",
+  "template": "typescript",
   "name": "@lenscape/string_utils",
-  "description": "String utilties for the me@eon project",
+  "description": "String utilties for the @lenscape project",
   "packageJson": {
     "dependencies": {
     },

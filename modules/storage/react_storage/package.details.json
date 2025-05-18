@@ -1,0 +1,28 @@
+{
+  "template": "react_library",
+  "name": "@lenscape/react_storage",
+  "description": "allows long term storage of data in a style similar to useState using 'instant' storage such as localstorage or cookiestorage",
+  "links": [
+    "@lenscape/partial_functions",
+    "@lenscape/storage",
+    "@lenscape/string_utils"
+  ],
+  "packageJson": {
+    "files": [
+      "build/"
+    ],
+    "dependencies": {
+    },
+    "devDependencies": {
+    },
+    "scripts": {
+      "start": "react-scripts start"
+    }
+  },
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true,
+    "react": false
+  }
+}

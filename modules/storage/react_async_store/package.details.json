@@ -1,0 +1,28 @@
+{
+  "template": "react_library",
+  "name": "@lenscape/react_async_store",
+  "description": "ALlows long term storage with similar feel to useState for async storage (takes time storage)",
+  "links": [
+    "@lenscape/partial_functions",
+    "@lenscape/storage",
+    "@lenscape/string_utils"
+  ],
+  "packageJson": {
+    "files": [
+      "build/"
+    ],
+    "dependencies": {
+    },
+    "devDependencies": {
+    },
+    "scripts": {
+      "start": "react-scripts start"
+    }
+  },
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true,
+    "react": false
+  }
+}

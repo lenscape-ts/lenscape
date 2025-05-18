@@ -1,7 +1,7 @@
 {
-  "template": "react_library",
+  "template": "typescript",
   "name": "@lenscape/records",
-  "description": "record utilties for the me@eon project",
+  "description": "record utilties for the @lenscape project",
   "packageJson": {
     "dependencies": {
     },

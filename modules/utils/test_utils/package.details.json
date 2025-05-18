@@ -1,0 +1,19 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/test_utils",
+  "description": "test utilities for the @lenscape project",
+  "packageJson": {
+    "dependencies": {
+    },
+    "devDependencies": {
+
+    }
+  },
+  "links": [
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": false
+  }
+}
