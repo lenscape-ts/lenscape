@@ -65,6 +65,12 @@ describe("error.monad.ts ", () => {
             expect(() => valueOrThrow(e)).toThrow(ErrorsException);
             expect(() => valueOrThrow(e)).toThrow("bad, worse");
         });
+        it ('throws ErrorsException when given Errors with extras', () => {
+            const e = createErrors(["bad", "worse"], "REF", { info: true });
+            expect(() => valueOrThrow(e)).toThrow(ErrorsException);
+            expect(() => valueOrThrow(e)).toThrow("bad, worse");
+
+        })
     });
 
     describe("errorsOrThrow", () => {

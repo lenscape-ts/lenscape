@@ -15,8 +15,11 @@
     ]
   },
   "dependencies": {
-    "@lenscape/partial_functions": "0.1.0",
-    "@lenscape/storage": "0.1.0",
+    "@lenscape/async": "0.1.0",
+    "@lenscape/async_storage": "0.1.0",
+    "@lenscape/context": "0.1.0",
+    "@lenscape/errors": "0.1.0",
+    "@lenscape/lenscape_components": "0.1.0",
     "@lenscape/string_utils": "0.1.0",
     "debug": "^4.3.4",
     "@focuson/lens": "1.44.3",

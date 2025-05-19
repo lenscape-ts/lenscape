@@ -1,13 +1,11 @@
 {
   "template": "react_library",
-  "name": "@lenscape/react_async_store",
-  "description": "ALlows long term storage with similar feel to useState for async storage (takes time storage)",
+  "name": "@lenscape/lenscape_components",
+  "description": "The interfaces and some simple implementations (that can be overriden) of the components needed by lenscape",
   "links": [
     "@lenscape/async",
-    "@lenscape/async_storage",
     "@lenscape/context",
     "@lenscape/errors",
-    "@lenscape/lenscape_components",
     "@lenscape/string_utils"
   ],
   "packageJson": {

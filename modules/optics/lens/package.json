@@ -20,6 +20,7 @@
     "debug": "^4.3.4"
   },
   "devDependencies": {
+    "@lenscape/async": "0.1.0",
     "typescript": "^5.2.2",
     "@testing-library/jest-dom": "^6.1.4",
     "@types/jest": "^29.0.0",

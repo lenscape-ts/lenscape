@@ -1,0 +1,18 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/async",
+  "description": "Tools to help deal with async code",
+  "packageJson": {
+    "dependencies": {
+    },
+    "devDependencies": {
+    }
+  },
+  "links": [
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true
+  }
+}

@@ -1,6 +1,9 @@
 import {ComposedPathPart, identityLens, LensAndPath, LensPath} from "./lensPathPart";
-import {child, index, objectCompose} from "./lens.domain";
+import {child, index, objectCompose, variantChild} from "./lens.domain";
 import {lensFromPath} from "./lens.serialisation";
+
+type VariantHavingKey<Union, Key extends PropertyKey> =
+    Union extends Record<Key, any> ? Union : never;
 
 /**
  * LensBuilder class for easier lens creation and focus chaining.
@@ -83,6 +86,29 @@ export class LensBuilder<Main, Child> implements LensAndPath<Main, Child> {
     focusOn<K extends keyof Child>(key: K): LensBuilder<Main, Child[K]> {
         return new LensBuilder(child(this._lens, key));
     }
+
+    focusOnSingleKeyVariant<
+        Key extends PropertyKey,
+        Variant extends VariantHavingKey<Child, Key>
+    >(
+        key: Key
+    ): LensBuilder<Main, Variant[Key] | undefined> {
+        const get = (main: Main): Variant[Key] | undefined => {
+            const child = this._lens.get(main);
+            if (child && typeof child === 'object' && key in child) {
+                return (child as any)[key];
+            }
+            return undefined;
+        };
+
+        const set = (main: Main, value: Variant[Key]): Main => {
+            const variant = {[key]: value} as Child;
+            return this._lens.set(main, variant);
+        };
+
+        return new LensBuilder(variantChild<Main, Child, Key, Variant>(this._lens, key));
+    }
+
 
     /**
      * Chain another lens after the current focus.

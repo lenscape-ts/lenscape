@@ -1,5 +1,5 @@
 // Create a lens that focuses on a specific child property in a larger object
-import { ComposedPathPart, LensAndPath, LensPath } from "./lensPathPart";
+import {ComposedPathPart, LensAndPath, LensPath} from "./lensPathPart";
 
 export function child<Main, T, K extends keyof T>(
     lens: LensAndPath<Main, T>,
@@ -9,12 +9,34 @@ export function child<Main, T, K extends keyof T>(
         get: (main: Main) => lens.get(main)?.[key], // Get the child property
         set: (main: Main, child: T[K]) => {
             const parent = lens.get(main) || ({} as T); // Default parent to an empty object if undefined
-            const updatedParent = { ...parent, [key]: child }; // Create a new object with the updated child
+            const updatedParent = {...parent, [key]: child}; // Create a new object with the updated child
             return lens.set(main, updatedParent as T); // Set the updated parent in the main object
         },
         path: [...lens.path, key as string], // Append key to the path
     };
 }
+
+type VariantHavingKey<Union, Key extends PropertyKey> =
+    Union extends Record<Key, any> ? Union : never;
+
+
+export function variantChild<Main, Child, Key extends PropertyKey, Variant extends VariantHavingKey<Child, Key>>(lens: LensAndPath<Main, Child>, key: Key): LensAndPath<Main, Variant[Key]> {
+    const get = (main: Main): Variant[Key] | undefined => {
+        const child = lens.get(main);
+        if (child && typeof child === 'object' && key in child) {
+            return (child as any)[key];
+        }
+        return undefined;
+    };
+
+    const set = (main: Main, value: Variant[Key]): Main => {
+        const variant = {[key]: value} as Child;
+        return lens.set(main, variant);
+    };
+
+    return {get, set, path: [...lens.path, `${String(key)}!`]};
+}
+
 
 // A function that allows us to focus on an array element at a specific index
 export function index<Main, T extends any[]>(
@@ -55,7 +77,7 @@ export function objectCompose<Main, T, Children extends Record<string, LensAndPa
         },
         set: (mainObj: Main, childValue: { [K in keyof Children]: Children[K] extends LensAndPath<T, infer U> ? U : never }) => {
             const parentValue = main.get(mainObj) || ({} as T);
-            let updatedParent = { ...parentValue };
+            let updatedParent = {...parentValue};
             for (const key in children) {
                 if (key in childValue) {
                     updatedParent = children[key].set(updatedParent, childValue[key]);

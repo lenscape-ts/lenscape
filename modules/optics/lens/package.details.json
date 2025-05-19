@@ -3,11 +3,13 @@
   "name": "@lenscape/lens",
   "description": "A simple implementation of optics and turning them into/from paths",
   "packageJson": {
-    "files": ["build/"],
+    "files": [
+      "build/"
+    ],
     "dependencies": {
     },
     "devDependencies": {
-
+      "@lenscape/async": "${version}"
     },
     "links": [
     ]

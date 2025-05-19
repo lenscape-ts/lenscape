@@ -1,6 +1,5 @@
-
-import { ComposedPathPart, identityLens, LensAndPath, LensPath, LensPathPart } from "./lensPathPart";
-import { child, index, objectCompose } from "./lens.domain";
+import {ComposedPathPart, identityLens, LensAndPath, LensPath, LensPathPart} from "./lensPathPart";
+import {child, index, objectCompose, variantChild} from "./lens.domain";
 
 export type Token = string | number | '{' | '}' | ':' | ',';
 
@@ -152,10 +151,12 @@ export function serializeLens(path: LensPath): string {
 }
 
 export function lensFromPath<Main, Child>(path: LensPath | string): LensAndPath<Main, Child> {
-
     const buildLens = (lens: LensAndPath<any, any>, pathPart: LensPathPart): LensAndPath<any, any> => {
         if (typeof pathPart === 'string') {
-            return child(lens, pathPart);
+            if (pathPart.endsWith('!'))
+                return variantChild(lens, pathPart.slice(0, -1));
+            else
+                return child(lens, pathPart);
         } else if (typeof pathPart === 'number') {
             return index(lens, pathPart);
         } else if (typeof pathPart === 'object') {

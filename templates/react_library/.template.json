@@ -17,6 +17,10 @@
       "target": "jest.config.json"
     },
     {
+      "file":   "jest.setup.js",
+      "target": "jest.setup.js"
+    },
+    {
       "target":    "package.json",
       "file":      "package.json",
       "templated": "${}",
