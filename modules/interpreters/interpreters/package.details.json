@@ -1,0 +1,32 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/interpreter",
+  "description": "The interface and some simple implementations of interpreters",
+  "links": [
+    "@lenscape/arrays",
+    "@lenscape/async_storage",
+    "@lenscape/errors",
+    "@lenscape/events",
+    "@lenscape/lens",
+    "@lenscape/string_utils",
+    "@lenscape/records"
+  ],
+  "packageJson": {
+    "files": [
+      "build/"
+    ],
+    "dependencies": {
+    },
+    "devDependencies": {
+    },
+    "scripts": {
+      "start": "react-scripts start"
+    }
+  },
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true,
+    "react": false
+  }
+}

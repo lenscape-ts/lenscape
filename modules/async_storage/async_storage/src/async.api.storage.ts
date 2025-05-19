@@ -1,7 +1,7 @@
-import { AsyncStore } from "./async.storage";
-import { ErrorsOr, isErrors } from "@lenscape/errors";
-import { NameAnd } from "@lenscape/records";
-import { AxiosStatic, AxiosInstance, AxiosRequestConfig } from "axios";
+import {StoreGetAsyncStore} from "./async.storage";
+import {ErrorsOr, isErrors} from "@lenscape/errors";
+import {NameAnd} from "@lenscape/records";
+import {AxiosInstance, AxiosRequestConfig, AxiosStatic} from "axios";
 
 export type AsyncStoreConfig<Id, Data> = {
     axios: AxiosStatic | AxiosInstance;
@@ -64,7 +64,7 @@ export function apiAsyncStore<Id, Data>({
                                             validateId,
                                             notFoundDetection = defaultNotFoundDetection,
                                             errorDetection = defaultErrorDetection,
-                                        }: AsyncStoreConfig<Id, Data>): AsyncStore<Id, Data> {
+                                        }: AsyncStoreConfig<Id, Data>): StoreGetAsyncStore<Id, Data> {
     return {
         store: async (id, t): Promise<ErrorsOr<void>> => {
             const errors = validateId?.(id) || [];
@@ -120,6 +120,24 @@ export function apiAsyncStore<Id, Data>({
             }
 
             return load.parser(responseBody);
+        },
+    };
+}
+
+export function apiAsyncStoreWithAppend<Id, Child>(
+    config: AsyncStoreConfig<Id, Child[]>
+): StoreGetAsyncStore<Id, Child[]> & { append: (id: Id, t: Child) => Promise<ErrorsOr<void>> } {
+    const baseStore = apiAsyncStore(config);
+
+    return {
+        ...baseStore,
+        append: async (id, child): Promise<ErrorsOr<void>> => {
+            const currentDataResult = await baseStore.get(id);
+            if (isErrors(currentDataResult)) return currentDataResult;
+
+            const currentData = currentDataResult.value || [];
+            const updatedData = [...currentData, child];
+            return baseStore.store(id, updatedData);
         },
     };
 }

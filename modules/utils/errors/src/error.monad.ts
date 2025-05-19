@@ -69,7 +69,7 @@ export function isValue<T>(e: ErrorsOr<T>): e is Value<T> {
  * @returns True if e contains errors, false if it contains a value.
  */
 export function isErrors<T>(e: ErrorsOr<T>): e is Errors {
-    return (e as any)?.errors !== undefined;
+    return 'errors' in e
 }
 
 /**

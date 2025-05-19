@@ -2,6 +2,12 @@ import {ComposedPathPart, identityLens, LensAndPath, LensPath} from "./lensPathP
 import {child, index, objectCompose, variantChild} from "./lens.domain";
 import {lensFromPath} from "./lens.serialisation";
 
+export const mapLens = <Main, Child>(lens: LensAndPath<Main, Child>, fn: (c: Child) => Child) => (main: Main): Main => {
+    const initial = lens.get(main)
+    const updated = fn(initial)
+    return lens.set(main, updated)
+};
+
 type VariantHavingKey<Union, Key extends PropertyKey> =
     Union extends Record<Key, any> ? Union : never;
 

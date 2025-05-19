@@ -12,6 +12,7 @@ export function interleave<T>(arrays: T[][]): T[] {
     }
     return result;
 }
+
 export function removeDuplicates<T>(findIdFn: FindIdFn<T>) {
     return (rawResult: T[]) => {
         const result: T[] = [];
@@ -36,4 +37,8 @@ export function countByKey<T>(array: T[], key: keyof T): { [key: string]: number
         }
         return acc;
     }, {});
+}
+
+export function collect<T, Child extends T>(ts: T[], guard: (ta: T) => ta is Child): Child[] {
+    return ts.filter(guard);
 }

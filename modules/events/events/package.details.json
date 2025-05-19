@@ -1,0 +1,27 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/events",
+  "description": "The interface for our events",
+  "links": [
+    "@lenscape/partial_functions",
+    "@lenscape/string_utils"
+  ],
+  "packageJson": {
+    "files": [
+      "build/"
+    ],
+    "dependencies": {
+    },
+    "devDependencies": {
+    },
+    "scripts": {
+      "start": "react-scripts start"
+    }
+  },
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true,
+    "react": false
+  }
+}
