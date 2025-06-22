@@ -1,0 +1,22 @@
+{
+  "template": "react_library",
+  "name": "@lenscape/react_async",
+  "description": "tools for asynchronous react components",
+  "packageJson": {
+    "dependencies": {
+    },
+    "devDependencies": {
+      "@lenscape/test_utils": "${version}"
+    }
+  },
+  "links": [
+    "@lenscape/async",
+    "@lenscape/lens",
+    "@lenscape/string_utils"
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true
+  }
+}

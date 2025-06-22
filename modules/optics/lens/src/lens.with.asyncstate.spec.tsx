@@ -1,5 +1,5 @@
 import {AsyncState, LoadingAS, ErrorAS, DataAS} from "@lenscape/async";
-import {lensBuilder} from "./lens";
+import {LensBuilder, lensBuilder} from "./lens";
 import exp = require("node:constants");
 import {lensFromPath} from "./lens.serialisation";
 
@@ -15,11 +15,11 @@ const parentLoading: Parent = {
 
 }
 const parentError: Parent = {
-    state: {error: 'some error'},
+    state: {errors: ['some error']},
     other: 'something'
 }
 const newError: Parent = {
-    state: {error: 'newError'},
+    state: {errors: ['newError']},
     other: 'something'
 }
 const parent1: Parent = {
@@ -32,13 +32,13 @@ const parent2: Parent = {
 }
 
 const lb = lensBuilder<Parent>()
-const stateL = lb.focusOn('state')
+const stateL:LensBuilder<Parent, AsyncState<Child>> = lb.focusOn('state')
 const dataL = stateL.focusOnSingleKeyVariant('data')
 
 describe('checking focusOnSingleKeyVariant with async state', () => {
     describe('using builder', () => {
         const loadingL = stateL.focusOnSingleKeyVariant('loading')
-        const errorL = stateL.focusOnSingleKeyVariant('error')
+        const errorL = stateL.focusOnSingleKeyVariant('errors')
         const childAL = dataL.focusOn('a')
 
         test('getters', () => {
@@ -52,9 +52,9 @@ describe('checking focusOnSingleKeyVariant with async state', () => {
             expect(loadingL.set(parent1, true)).toEqual(parentLoading)
         })
         test('error setting', () => {
-            expect(errorL.set(parentLoading, 'newError')).toEqual(newError)
-            expect(errorL.set(parentError, 'newError')).toEqual(newError)
-            expect(errorL.set(parent1, 'newError')).toEqual(newError)
+            expect(errorL.set(parentLoading, ['newError'])).toEqual(newError)
+            expect(errorL.set(parentError, ['newError'])).toEqual(newError)
+            expect(errorL.set(parent1, ['newError'])).toEqual(newError)
         })
         test('data setting', () => {
             expect(childAL.set(parentLoading, 2)).toEqual(parent2)
@@ -63,13 +63,13 @@ describe('checking focusOnSingleKeyVariant with async state', () => {
         })
         test('path', () => {
             expect(loadingL.path).toEqual(['state', 'loading!'])
-            expect(errorL.path).toEqual(['state', 'error!'])
+            expect(errorL.path).toEqual(['state', 'errors!'])
             expect(childAL.path).toEqual(['state', 'data!', 'a'])
         })
     })
     describe('serialisation', () => {
         const loadingL = lensFromPath(stateL.focusOnSingleKeyVariant('loading').path)
-        const errorL = lensFromPath(stateL.focusOnSingleKeyVariant('error').path)
+        const errorL = lensFromPath(stateL.focusOnSingleKeyVariant('errors').path)
         const childAL = lensFromPath(dataL.focusOn('a').path)
 
         test('getters', () => {
@@ -83,9 +83,9 @@ describe('checking focusOnSingleKeyVariant with async state', () => {
             expect(loadingL.set(parent1, true)).toEqual(parentLoading)
         })
         test('error setting', () => {
-            expect(errorL.set(parentLoading, 'newError')).toEqual(newError)
-            expect(errorL.set(parentError, 'newError')).toEqual(newError)
-            expect(errorL.set(parent1, 'newError')).toEqual(newError)
+            expect(errorL.set(parentLoading, ['newError'])).toEqual(newError)
+            expect(errorL.set(parentError, ['newError'])).toEqual(newError)
+            expect(errorL.set(parent1, ['newError'])).toEqual(newError)
         })
         test('data setting', () => {
             expect(childAL.set(parentLoading, 2)).toEqual(parent2)
@@ -94,7 +94,7 @@ describe('checking focusOnSingleKeyVariant with async state', () => {
         })
         test('path', () => {
             expect(loadingL.path).toEqual(['state', 'loading!'])
-            expect(errorL.path).toEqual(['state', 'error!'])
+            expect(errorL.path).toEqual(['state', 'errors!'])
             expect(childAL.path).toEqual(['state', 'data!', 'a'])
         })
     })

@@ -22,16 +22,19 @@
     "coverage:open": "open-cli coverage/index.html",
     "laoban": "laoban",
     "test:count": "laoban testcount",
-    "test:allcount": "laoban testcount | jq -s \"{packagesWithTests: length, totalNumTotalTestSuites: map(.numTotalTestSuites) | add, totalNumTotalTests: map(.numTotalTests) | add, totalNumFailedTests: map(.numFailedTests) | add}\""
+    "test:allcount": "laoban testcount | jq -s \"{packagesWithTests: length, totalNumTotalTestSuites: map(.numTotalTestSuites) | add, totalNumTotalTests: map(.numTotalTests) | add, totalNumFailedTests: map(.numFailedTests) | add}\"",
+    "demo:api": "ts-node --cwd modules/async_storage/async_storage_api index.ts",
+    "demo:start": "cd modules/async_storage/react_event_storage_demo && yarn start"
   },
   "author": "phil <phil.rice@validoc.org>",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@parcel/packager-raw-url": "2.15.1",
+    "@parcel/transformer-webmanifest": "2.15.1",
+    "laoban": "^1.4.58",
     "madge": "^8.0.0",
     "nyc": "^17.1.0",
-    "open-cli": "^8.0.0",
-    "laoban": "^1.4.58"
+    "open-cli": "^8.0.0"
   },
   "resolutions": {
     "//": "See https://github.com/facebook/create-react-app/issues/11773",

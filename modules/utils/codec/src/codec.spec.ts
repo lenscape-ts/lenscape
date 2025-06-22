@@ -1,5 +1,5 @@
 import {errorsOrThrow} from "@lenscape/errors";
-import {jsonCodec, nullCodec} from "./codec";
+import {jsonCodec, nullCodec, stringCodec} from "./codec";
 import type {Validator} from "@lenscape/validate";
 
 describe("jsonCodec.encode", () => {
@@ -145,3 +145,11 @@ describe("nullCodec", () => {
         });
     });
 });
+
+describe("stringCodec", () => {
+
+    test("encode and decode a string", () => {
+        expect(stringCodec.decode('abc')).toEqual({value: 'abc'})
+        expect(stringCodec.encode('sad')).toEqual({value: 'sad'})
+    })
+})

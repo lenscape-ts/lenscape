@@ -1,5 +1,5 @@
-import { ErrorsOr } from "@lenscape/errors";
-import { Validator, validateMap, validateMapLazy } from "@lenscape/validate";
+import {ErrorsOr} from "@lenscape/errors";
+import {Validator, validateMap, validateMapLazy} from "@lenscape/validate";
 
 export type Codec<T> = {
     encode: (t: T) => ErrorsOr<string>
@@ -8,10 +8,14 @@ export type Codec<T> = {
 
 export function nullCodec<T extends string>(defaultValue: T): Codec<T> {
     return {
-        encode: (t) => ({ value: t === null ? defaultValue : t }),
-        decode: (t) => ({ value: t === null ? defaultValue : t as T }),
+        encode: (t) => ({value: t === null ? defaultValue : t}),
+        decode: (t) => ({value: t === null ? defaultValue : t as T}),
     };
+}
 
+export const stringCodec: Codec<string> = {
+    encode: (t) => ({value: t}),
+    decode: (s) => ({value: s }),
 }
 
 export type JsonCodecConfig<T> = {

@@ -1,4 +1,4 @@
-import { countByKey, FindIdFn, interleave, removeDuplicates } from "./arrays";
+import {collect, countByKey, FindIdFn, interleave, removeDuplicates} from "./arrays";
 
 
 describe("interleave", () => {
@@ -67,3 +67,21 @@ describe("countByKey", () => {
         });
     });
 });
+
+describe("collect", () => {
+    it("should collect items that match the guard", () => {
+        const data: (number | string)[] = [1, "two", 3, "four"];
+        const isNumber = (item: number | string): item is number => typeof item === "number";
+
+        const result = collect(data, isNumber);
+        expect(result).toEqual([1, 3]);
+    });
+
+    it("should return an empty array if no items match the guard", () => {
+        const data: (number | string)[] = ["one", "two", "three"];
+        const isNumber = (item: number | string): item is number => typeof item === "number";
+
+        const result = collect(data, isNumber);
+        expect(result).toEqual([]);
+    });
+})

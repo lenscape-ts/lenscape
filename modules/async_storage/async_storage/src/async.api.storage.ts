@@ -35,9 +35,11 @@ function defaultErrorDetection(status: number): boolean {
 async function performAxios(
     axiosClient: AxiosStatic | AxiosInstance,
     config: AxiosRequestConfig
-): Promise<ErrorsOr<{ status: number;
+): Promise<ErrorsOr<{
+    status: number;
     statusText: string;
-    body: string }>> {
+    body: string
+}>> {
     try {
         const response = await axiosClient.request({
             ...config,
@@ -52,7 +54,7 @@ async function performAxios(
             },
         };
     } catch (e: any) {
-        return { errors: [`Axios exception (${config.method} ${config.url}): ${e.message || e}`] };
+        return {errors: [`Axios exception (${config.method} ${config.url}): ${e.message || e}`]};
     }
 }
 
@@ -68,7 +70,7 @@ export function apiAsyncStore<Id, Data>({
     return {
         store: async (id, t): Promise<ErrorsOr<void>> => {
             const errors = validateId?.(id) || [];
-            if (errors.length > 0) return { errors };
+            if (errors.length > 0) return {errors};
 
             const url = save.url(id, t);
             const bodyResult = save.body(id, t);
@@ -84,17 +86,17 @@ export function apiAsyncStore<Id, Data>({
             const fetchResult = await performAxios(axios, config);
             if (isErrors(fetchResult)) return fetchResult;
 
-            const { status, statusText, body: responseBody } = fetchResult.value;
+            const {status, statusText, body: responseBody} = fetchResult.value;
             if (errorDetection(status, responseBody)) {
-                return { errors: [`Network response was not ok (${status} ${statusText}). Response: ${responseBody}`] };
+                return {errors: [`Network response was not ok (${status} ${statusText}). Response: ${responseBody}`]};
             }
 
-            return { value: undefined };
+            return {value: undefined};
         },
 
         get: async (id): Promise<ErrorsOr<Data>> => {
             const errors = validateId?.(id) || [];
-            if (errors.length > 0) return { errors };
+            if (errors.length > 0) return {errors};
 
             const url = load.url(id);
             const bodyResult = load.body(id);
@@ -110,13 +112,13 @@ export function apiAsyncStore<Id, Data>({
             const fetchResult = await performAxios(axios, config);
             if (isErrors(fetchResult)) return fetchResult;
 
-            const { status, statusText, body: responseBody } = fetchResult.value;
+            const {status, statusText, body: responseBody} = fetchResult.value;
             if (notFoundDetection(status, responseBody)) {
                 const def = await defaultValue(id);
-                return { value: def };
+                return {value: def};
             }
             if (errorDetection(status, responseBody)) {
-                return { errors: [`Network response was not ok (${status} ${statusText}). Response: ${responseBody}`] };
+                return {errors: [`Network response was not ok (${status} ${statusText}). Response: ${responseBody}`]};
             }
 
             return load.parser(responseBody);
@@ -126,17 +128,17 @@ export function apiAsyncStore<Id, Data>({
 
 export function apiAsyncStoreWithAppend<Id, Child>(
     config: AsyncStoreConfig<Id, Child[]>
-): StoreGetAsyncStore<Id, Child[]> & { append: (id: Id, t: Child) => Promise<ErrorsOr<void>> } {
+): StoreGetAsyncStore<Id, Child[]> & { append: (id: Id, ...t: Child[]) => Promise<ErrorsOr<void>> } {
     const baseStore = apiAsyncStore(config);
 
     return {
         ...baseStore,
-        append: async (id, child): Promise<ErrorsOr<void>> => {
+        append: async (id, ...child: Child[]): Promise<ErrorsOr<void>> => {
             const currentDataResult = await baseStore.get(id);
             if (isErrors(currentDataResult)) return currentDataResult;
 
             const currentData = currentDataResult.value || [];
-            const updatedData = [...currentData, child];
+            const updatedData = [...currentData, ...child];
             return baseStore.store(id, updatedData);
         },
     };

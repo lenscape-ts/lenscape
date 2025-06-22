@@ -1,5 +1,6 @@
 export type NameAnd<T> = Record<string, T>
 
+export type Env = NameAnd<string>
 
 // for example
 // Input {mygenius: ['training','mygenius'], jira: 'jira'}

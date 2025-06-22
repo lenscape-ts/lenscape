@@ -18,48 +18,46 @@ import {
 
 const zeroEvent: ZeroEvent = {
     event: 'zero',
-    metadata: { actor: 'tester' }
+    metadata: {actor: 'tester'}
 }
 
 const infoEvent: InfoEvent = {
     event: 'info',
-    metadata: { actor: 'tester' },
+    metadata: {actor: 'tester'},
     info: 'some-debug-info'
 }
 
 const errorEvent: ErrorEvent = {
     event: 'error',
-    metadata: { actor: 'tester' },
+    metadata: {actor: 'tester'},
     error: 'something went wrong',
     from: new Error('original')
 }
 
 const setIdEvent: SetIdEvent = {
     event: 'setId',
-    metadata: { actor: 'tester' },
+    metadata: {actor: 'tester'},
     path: '/foo/bar',
     id: 'blob-123',
-    parser: 'json'
 }
 
 const appendIdEvent: AppendIdEvent = {
     event: 'appendId',
-    metadata: { actor: 'tester' },
+    metadata: {actor: 'tester'},
     path: '/foo/bar',
-    id: 'blob-456',
-    parser: 'json'
+    id: 'blob-456'
 }
 
 const setValueEvent: SetValueEvent = {
     event: 'setValue',
-    metadata: { actor: 'tester' },
+    metadata: {actor: 'tester'},
     path: '/foo/bar',
-    value: { hello: 'world' }
+    value: {hello: 'world'}
 }
 
 const appendValueEvent: AppendValueEvent = {
     event: 'appendValue',
-    metadata: { actor: 'tester' },
+    metadata: {actor: 'tester'},
     path: '/foo/bar',
     value: 42
 }

@@ -98,7 +98,7 @@ export class LensBuilder<Main, Child> implements LensAndPath<Main, Child> {
         Variant extends VariantHavingKey<Child, Key>
     >(
         key: Key
-    ): LensBuilder<Main, Variant[Key] | undefined> {
+    ): LensBuilder<Main, Variant[Key] > {
         const get = (main: Main): Variant[Key] | undefined => {
             const child = this._lens.get(main);
             if (child && typeof child === 'object' && key in child) {

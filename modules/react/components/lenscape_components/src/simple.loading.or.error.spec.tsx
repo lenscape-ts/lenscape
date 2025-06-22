@@ -24,7 +24,7 @@ describe('SimpleLoadingOrError', () => {
     });
 
     it('renders error state correctly', () => {
-        const errorState: AsyncState<null> = { error: 'Network Error' };
+        const errorState: AsyncState<any> = { errors: ['Network Error'] };
 
         render(
             <SimpleLoadingOrError

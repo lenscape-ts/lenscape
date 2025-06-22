@@ -79,7 +79,7 @@ export function makeContextForAsyncPersistentState<Id, Data, FIELD extends strin
 
 
     function FieldProvider(props: ProviderProps<Data>) {
-        const rawGetterSetter = useState<AsyncState<Data>>({loading: true, error: null, data: null});
+        const rawGetterSetter = useState<AsyncState<Data>>({loading: true, errors: null, data: null});
         const [state, setState] = rawGetterSetter;
         const id = useId();
         const {children, whatWeAreLoading, dataIfNoId} = props;
@@ -90,10 +90,10 @@ export function makeContextForAsyncPersistentState<Id, Data, FIELD extends strin
                 store.get(id)
                     .then((data) =>
                         isErrors(data)
-                            ? alive && setState({error: data.errors.join(',')})
+                            ? alive && setState({errors: data.errors})
                             : alive && setState({data: data.value}))
                     .catch(e =>
-                        setState({error: e.message}));
+                        setState({errors: e.message}));
             else
                 setState({data: dataIfNoId});
             return () => {

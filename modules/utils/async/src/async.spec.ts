@@ -3,7 +3,7 @@ import {
     DataAS,
     dataOrThrow,
     ErrorAS,
-    errorOrThrow,
+    errorsOrThrowAs,
     isDataAs,
     isErrorAs,
     isLoadingAs,
@@ -13,7 +13,7 @@ import {
 describe('AsyncState type guards', () => {
     const dataState: DataAS<number> = {data: 42};
     const loadingState: LoadingAS = {loading: true};
-    const errorState: ErrorAS = {error: 'oops'};
+    const errorState: ErrorAS = {errors: ['oops']};
 
     it('identifies DataAS correctly', () => {
         expect(isDataAs(dataState)).toBe(true);
@@ -50,7 +50,7 @@ describe('dataOrThrow helper', () => {
     });
 
     it('throws provided error when state is ErrorAS', () => {
-        const errorState: AsyncState<string> = {error: 'network'};
+        const errorState: AsyncState<string> = {errors: ['network']};
         expect(() => dataOrThrow(errorState, errMsg)).toThrow(errMsg);
     });
 
@@ -63,26 +63,26 @@ describe('dataOrThrow helper', () => {
 
 describe('errorOrThrow helper', () => {
     it('returns error string when state is ErrorAS', () => {
-        const errorState: AsyncState<number> = {error: 'bad'};
-        expect(errorOrThrow(errorState)).toBe('bad');
+        const errorState: AsyncState<number> = {errors: ['bad']};
+        expect(errorsOrThrowAs(errorState)).toEqual(['bad']);
     });
 
     it('throws loading error when state is LoadingAS', () => {
         const loadingState: AsyncState<number> = {loading: true};
-        expect(() => errorOrThrow(loadingState)).toThrow(
+        expect(() => errorsOrThrowAs(loadingState)).toThrow(
             'Data is still loading'
         );
     });
 
     it('throws no-error message when state is DataAS', () => {
         const dataState: AsyncState<{ x: number }> = {data: {x: 1}};
-        expect(() => errorOrThrow(dataState)).toThrow(
+        expect(() => errorsOrThrowAs(dataState)).toThrow(
             `No error present. Data is ${JSON.stringify(dataState.data)}`
         );
     });
 
     it('throws Unknown state for invalid state object', () => {
         const bad = {} as AsyncState<any>;
-        expect(() => errorOrThrow(bad)).toThrow('Unknown state');
+        expect(() => errorsOrThrowAs(bad)).toThrow('Unknown state');
     });
 });

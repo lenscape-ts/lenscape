@@ -1,0 +1,15 @@
+{
+  "setupFilesAfterEnv": ["<rootDir>/jest.setup.js"],
+  "testEnvironment": "jsdom",
+  "transform": {
+    "^.+\\.(ts|tsx)$": ["ts-jest", {"tsconfig": {"module": "commonjs"}}],
+    "^.+\\.(js|jsx)$": "babel-jest"
+  },
+  "testMatch": ["**/__tests__/**/*.test.(ts|tsx|js|jsx)", "**/?(*.)+(spec|test).(ts|tsx|js|jsx)"],
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json"],
+  "testPathIgnorePatterns": ["<rootDir>/dist/"],
+  "testTimeout": 30000,
+  "transformIgnorePatterns": [],
+  "moduleNameMapper": {
+  }
+}

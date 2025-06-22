@@ -5,7 +5,7 @@ export type LoadingAS = {
     loading: true
 }
 export type ErrorAS = {
-    error: string | null
+    errors: string[]
 }
 
 export type AsyncState<T> = DataAS<T> | LoadingAS | ErrorAS
@@ -19,7 +19,7 @@ export function isLoadingAs(a: AsyncState<any>): a is LoadingAS {
 }
 
 export function isErrorAs(a: AsyncState<any>): a is ErrorAS {
-    return (a as ErrorAS).error !== undefined
+    return (a as ErrorAS).errors !== undefined
 }
 
 export function dataOrThrow<T>(state: AsyncState<T>, errorMessage: string): T {
@@ -33,9 +33,9 @@ export function dataOrThrow<T>(state: AsyncState<T>, errorMessage: string): T {
     throw new Error("Unknown state");
 }
 
-export function errorOrThrow<T>(state: AsyncState<T>): string {
+export function errorsOrThrowAs<T>(state: AsyncState<T>): string[] {
     if (isErrorAs(state)) {
-        return state.error as string;
+        return state.errors;
     } else if (isLoadingAs(state)) {
         throw new Error("Data is still loading");
     } else if (isDataAs(state)) {

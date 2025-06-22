@@ -72,9 +72,6 @@ export type ErrorEvent = BaseEvent & {
  */
 export type SetIdEvent = LensPathEvent & LensIdEvent & {
     event: 'setId'
-
-    /** Which parser to use when resolving the ID. */
-    parser: string
 }
 
 /**
@@ -82,8 +79,6 @@ export type SetIdEvent = LensPathEvent & LensIdEvent & {
  */
 export type AppendIdEvent = LensPathEvent & LensIdEvent & {
     event: 'appendId'
-    /** Which parser to use when resolving the ID. */
-    parser: string
 }
 
 /**
@@ -107,7 +102,7 @@ export type AppendValueEvent = LensPathEvent & {
 /**
  * Union of all events.
  */
-export type Event =
+export type LensEvent =
     | ZeroEvent
     | InfoEvent
     | ErrorEvent

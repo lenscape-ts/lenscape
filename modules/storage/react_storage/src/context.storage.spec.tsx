@@ -1,9 +1,10 @@
 import React, {ReactNode} from "react";
 import {render, screen, fireEvent} from "@testing-library/react";
-import {Codec} from "@lenscape/codec";
+
 import {mapStorageImplementation} from "@lenscape/storage";
 import {makeContextForSyncPersistentState} from "./context.storage";
 import {captureConsoleError} from "@lenscape/test_utils";
+import {Codec} from "@lenscape/codec";
 
 
 // Simple string‐based number codec

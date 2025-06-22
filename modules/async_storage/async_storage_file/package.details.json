@@ -1,0 +1,28 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/async_file_storage",
+  "description": "how we persist data using an api",
+  "links": [
+    "@lenscape/errors",
+    "@lenscape/string_utils"
+  ],
+  "packageJson": {
+    "files": [
+      "build/"
+    ],
+    "dependencies": {
+      "axios": "${properties.axios}"
+    },
+    "devDependencies": {
+    },
+    "scripts": {
+      "start": "react-scripts start"
+    }
+  },
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true,
+    "react": false
+  }
+}

@@ -42,3 +42,8 @@ export function countByKey<T>(array: T[], key: keyof T): { [key: string]: number
 export function collect<T, Child extends T>(ts: T[], guard: (ta: T) => ta is Child): Child[] {
     return ts.filter(guard);
 }
+
+export function toArray<T>(ts: T | T[]|undefined): T[] {
+    if (ts === undefined) return [];
+    return Array.isArray(ts) ? ts : [ts];
+}

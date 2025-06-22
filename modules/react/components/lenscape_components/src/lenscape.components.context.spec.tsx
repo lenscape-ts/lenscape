@@ -1,6 +1,7 @@
 import {render, screen} from '@testing-library/react';
 import {SimpleLoadingOrError} from './simple.loading.or.error';
-import {defaultLenscapeComponents, LenscapeComponentsProvider, useLenscapeComponents} from "./lenscape.components.context";
+import {useLenscapeComponents} from "./lenscape.components.context";
+import '@testing-library/jest-dom';
 
 describe('LenscapeComponentsProvider default', () => {
     it('provides SimpleLoadingOrError as LoadingOrError', () => {

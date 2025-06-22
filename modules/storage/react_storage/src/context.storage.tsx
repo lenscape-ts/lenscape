@@ -7,9 +7,10 @@ import {
     useThrowError
 } from "@lenscape/context";
 import {IStorage} from "@lenscape/storage";
-import {Codec} from "@lenscape/codec";
+
 import {isErrors, ThrowError} from "@lenscape/errors";
 import {capitalizeFirstLetter} from "@lenscape/string_utils";
+import {Codec} from "@lenscape/codec";
 
 
 export type ContextResultsForSyncPersistentState<Data, FIELD extends string> = {

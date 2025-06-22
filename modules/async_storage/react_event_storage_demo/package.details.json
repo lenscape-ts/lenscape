@@ -1,0 +1,29 @@
+{
+  "template": "react",
+  "name": "@lenscape/react_event_storage_demo",
+  "description": "A demo of the react event storage",
+  "links": [
+    "@lenscape/async_file_storage",
+    "@lenscape/errors",
+    "@lenscape/react_event_storage"
+  ],
+  "packageJson": {
+    "files": [
+      "build/"
+    ],
+    "dependencies": {
+      "axios": "${properties.axios}"
+    },
+    "devDependencies": {
+    },
+    "scripts": {
+      "start": "react-scripts start"
+    }
+  },
+  "guards": {
+    "compile": true,
+    "publish": false,
+    "test": false,
+    "react": false
+  }
+}

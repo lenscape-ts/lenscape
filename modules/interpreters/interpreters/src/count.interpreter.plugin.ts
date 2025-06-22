@@ -5,6 +5,6 @@ export const CountInterpreterPlugin: InterpreterPlugIn<number> = {
     name: 'count',
     description: 'Counts the number of events',
     initial: 0,
-    execute: async (params) => params.length
+    execute: async (params) => ({value:params.length})
 }
 

@@ -47,7 +47,7 @@ describe('makeContextForAsyncPersistentState', () => {
         const [state, setState] = useAsync('id1');
         let display: string;
         if (isLoadingAs(state)) display = 'loading';
-        else if (isErrorAs(state)) display = state.error!;
+        else if (isErrorAs(state)) display = state.errors.join(',');
         else display = state.data!;
         return (
             <>
@@ -94,7 +94,7 @@ describe('makeContextForAsyncPersistentState', () => {
             <LenscapeComponentsProvider
                 lenscapeComponents={{
                     LoadingOrError: ({ state }: any) => (
-                        <div data-testid="loading-error">{state.error}</div>
+                        <div data-testid="loading-error">{state.errors}</div>
                     ),
                 }}
             >

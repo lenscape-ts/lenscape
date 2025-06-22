@@ -1,0 +1,28 @@
+{
+  "template": "react_library",
+  "name": "@lenscape/react_event_storage",
+  "description": "A useState that is updated by events not by setState",
+  "links": [
+    "@lenscape/errors",
+    "@lenscape/event_storage"
+  ],
+  "packageJson": {
+    "files": [
+      "build/"
+    ],
+    "dependencies": {
+      "axios": "${properties.axios}"
+    },
+    "devDependencies": {
+    },
+    "scripts": {
+      "start": "react-scripts start"
+    }
+  },
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true,
+    "react": false
+  }
+}

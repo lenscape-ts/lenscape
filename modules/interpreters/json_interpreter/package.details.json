@@ -3,7 +3,6 @@
   "name": "@lenscape/json_interpreter",
   "description": "The 'classic' interpreter that turns events into state",
   "links": [
-    "@lenscape/partial_functions",
     "@lenscape/events",
     "@lenscape/interpreter",
     "@lenscape/lens",

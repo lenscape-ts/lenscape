@@ -1,0 +1,31 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/async_storage_api",
+  "description": "a filesystem implementation for async storage",
+  "links": [
+    "@lenscape/async_storage",
+    "@lenscape/codec",
+    "@lenscape/errors",
+    "@lenscape/string_utils"
+  ],
+  "packageJson": {
+    "files": [
+      "build/"
+    ],
+    "dependencies": {
+      "express": "${properties.express}"
+    },
+    "devDependencies": {
+      "@types/express": "${properties.@types/express}"
+    },
+    "scripts": {
+      "start": "react-scripts start"
+    }
+  },
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": false,
+    "react": false
+  }
+}

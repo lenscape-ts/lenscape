@@ -17,7 +17,6 @@
     ]
   },
   "dependencies": {
-    "@lenscape/partial_functions": "0.1.0",
     "@lenscape/events": "0.1.0",
     "@lenscape/interpreter": "0.1.0",
     "@lenscape/lens": "0.1.0",
