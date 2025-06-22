@@ -28,7 +28,7 @@ jobs:
         run: yarn install --immutable
 
       - name: Compile
-        run: yarn laoban compile
+        run: yarn laoban compile -s
 
       - name: Test
         run: yarn coveragesh # Runs on linux. If on windows it would be yarn coverage
