@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/react_async_store",
   "description": "ALlows long term storage with similar feel to useState for async storage (takes time storage)",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "browserslist": {
     "development": [
       "last 1 chrome version",
@@ -15,12 +15,12 @@
     ]
   },
   "dependencies": {
-    "@lenscape/async": "0.1.0",
-    "@lenscape/async_storage": "0.1.0",
-    "@lenscape/context": "0.1.0",
-    "@lenscape/errors": "0.1.0",
-    "@lenscape/lenscape_components": "0.1.0",
-    "@lenscape/string_utils": "0.1.0",
+    "@lenscape/async": "0.1.1",
+    "@lenscape/async_storage": "0.1.1",
+    "@lenscape/context": "0.1.1",
+    "@lenscape/errors": "0.1.1",
+    "@lenscape/lenscape_components": "0.1.1",
+    "@lenscape/string_utils": "0.1.1",
     "debug": "^4.3.4",
     "@focuson/lens": "1.44.3",
     "@focuson/state": "1.44.3",

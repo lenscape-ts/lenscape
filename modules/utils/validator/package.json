@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/validate",
   "description": "Validation for the @lenscape project",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/index",
   "types": "dist/index",
   "browserslist": {

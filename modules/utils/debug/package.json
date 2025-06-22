@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/debug",
   "description": "Context utilties for the me@eon project",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "browserslist": {
     "development": [
       "last 1 chrome version",
@@ -15,8 +15,8 @@
     ]
   },
   "dependencies": {
-    "@lenscape/context": "0.1.0",
-    "@lenscape/records": "0.1.0",
+    "@lenscape/context": "0.1.1",
+    "@lenscape/records": "0.1.1",
     "debug": "^4.3.4",
     "@focuson/lens": "1.44.3",
     "@focuson/state": "1.44.3",

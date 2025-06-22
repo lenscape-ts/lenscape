@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/react_event_storage",
   "description": "A useState that is updated by events not by setState",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "browserslist": {
     "development": [
       "last 1 chrome version",
@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "axios": "1.7.2",
-    "@lenscape/errors": "0.1.0",
-    "@lenscape/event_storage": "0.1.0",
+    "@lenscape/errors": "0.1.1",
+    "@lenscape/event_storage": "0.1.1",
     "debug": "^4.3.4",
     "@focuson/lens": "1.44.3",
     "@focuson/state": "1.44.3",

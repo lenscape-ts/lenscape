@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/errors",
   "description": "How errors are represented",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/index",
   "types": "dist/index",
   "browserslist": {
@@ -17,7 +17,7 @@
     ]
   },
   "dependencies": {
-    "@lenscape/records": "0.1.0",
+    "@lenscape/records": "0.1.1",
     "debug": "^4.3.4"
   },
   "devDependencies": {

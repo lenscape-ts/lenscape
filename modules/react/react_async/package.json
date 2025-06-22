@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/react_async",
   "description": "tools for asynchronous react components",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "browserslist": {
     "development": [
       "last 1 chrome version",
@@ -15,16 +15,16 @@
     ]
   },
   "dependencies": {
-    "@lenscape/async": "0.1.0",
-    "@lenscape/lens": "0.1.0",
-    "@lenscape/string_utils": "0.1.0",
+    "@lenscape/async": "0.1.1",
+    "@lenscape/lens": "0.1.1",
+    "@lenscape/string_utils": "0.1.1",
     "debug": "^4.3.4",
     "@focuson/lens": "1.44.3",
     "@focuson/state": "1.44.3",
     "@laoban/utils": "1.4.45"
   },
   "devDependencies": {
-    "@lenscape/test_utils": "0.1.0",
+    "@lenscape/test_utils": "0.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "@babel/core": "^7.26.0",

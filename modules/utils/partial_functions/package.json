@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/partial_functions",
   "description": "utilities about partial functions",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/index",
   "types": "dist/index",
   "browserslist": {

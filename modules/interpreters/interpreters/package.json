@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/interpreter",
   "description": "The interface and some simple implementations of interpreters",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/index",
   "types": "dist/index",
   "browserslist": {
@@ -17,13 +17,13 @@
     ]
   },
   "dependencies": {
-    "@lenscape/arrays": "0.1.0",
-    "@lenscape/async_storage": "0.1.0",
-    "@lenscape/errors": "0.1.0",
-    "@lenscape/events": "0.1.0",
-    "@lenscape/lens": "0.1.0",
-    "@lenscape/string_utils": "0.1.0",
-    "@lenscape/records": "0.1.0",
+    "@lenscape/arrays": "0.1.1",
+    "@lenscape/async_storage": "0.1.1",
+    "@lenscape/errors": "0.1.1",
+    "@lenscape/events": "0.1.1",
+    "@lenscape/lens": "0.1.1",
+    "@lenscape/string_utils": "0.1.1",
+    "@lenscape/records": "0.1.1",
     "debug": "^4.3.4"
   },
   "devDependencies": {
