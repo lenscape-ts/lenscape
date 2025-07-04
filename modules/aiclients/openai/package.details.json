@@ -5,9 +5,11 @@
   "packageJson": {
     "dependencies": {
       "axios": "${properties.axios}",
-      "tiktoken": "1.0.21"
+      "tiktoken": "${properties.tiktoken}"
     },
-    "devDependencies": {},
+    "devDependencies": {
+      "axios-mock-adapter": "${properties.axios-mock-adapter}"
+    },
     "browser": {
       "child_process": false
     }
@@ -18,6 +20,6 @@
   "guards": {
     "compile": true,
     "publish": true,
-    "test": false
+    "test": true
   }
 }

@@ -9,6 +9,7 @@
   ],
   "properties": {
     "axios": "1.7.2",
+    "axios-mock-adapter": "^2.1.0",
     "license": "MIT",
     "@types/express": "^5.0.2",
     "express": "^5.1.0",

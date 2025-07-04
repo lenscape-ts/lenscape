@@ -1,8 +1,8 @@
-import axios, {AxiosStatic} from "axios";
+import {AxiosStatic} from "axios";
 import {AiClient, AiOptions} from "@lenscape/aiclient";
 import {BaseMessage} from "@lenscape/agents";
 import {Env} from "@lenscape/records";
-import {encoding_for_model, TiktokenModel} from "tiktoken";
+import {encoding_for_model} from "tiktoken";
 
 export type OpenAiConfig = {
     axios: AxiosStatic,
@@ -23,18 +23,19 @@ export function defaultOpenAiConfig(axios: AxiosStatic, env: Env): OpenAiConfig 
     }
 }
 
-function optionsToBody(options: AiOptions, config: OpenAiConfig): any {
+function optionsToBody(options: AiOptions, config: OpenAiConfig, messages: BaseMessage[]): any {
     const customisation = options.customisation || config.customisation || {};
     const model = options.model || config.model || 'gpt-4';
     const encoder = encoding_for_model(model as any)
-    const temperature = options.temperature;
-    const logit_bias = options.logit.length === 0
-        ? undefined
-        : Object.fromEntries(options.logit.map(word => {
-            const firstToken = encoder.encode(word)[0].toString();
-            return [firstToken, 50];
+    const temperature = options.temperature !== undefined ? options.temperature : 0.7;
+
+    const logit_bias = options.logit && options.logit.length > 0
+        ? Object.fromEntries(options.logit.flatMap(word => {
+            const tokens = encoder.encode(word);
+            return tokens.length === 0 ? [] : [[tokens[0]?.toString(), 50]];
         }))
-    return {model, logit_bias, temperature, ...customisation};
+        : undefined
+    return {...customisation, model, logit_bias, temperature, messages};
 }
 
 export const openAiClient = (config: OpenAiConfig,): AiClient => {
@@ -49,7 +50,7 @@ export const openAiClient = (config: OpenAiConfig,): AiClient => {
     });
     return async (messages: BaseMessage[], options: AiOptions = {}): Promise<BaseMessage[]> => {
         if (debug) console.log('openAiMessagesClient', messages, config)
-        const body = optionsToBody(options, config);
+        const body = optionsToBody(options, config, messages);
         try {
             const response = await axiosInstance.post(`/v1/chat/completions`, body);
             return response.data.choices.map((x: any) => x.message);

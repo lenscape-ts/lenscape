@@ -13,7 +13,7 @@ import {
     isSetIdEvent,
     isAppendIdEvent,
     isSetValueEvent,
-    isAppendValueEvent,
+    isAppendValueEvent, isIdEvent,
 } from './events'
 
 const zeroEvent: ZeroEvent = {
@@ -154,6 +154,19 @@ describe('Event type-guards', () => {
             false,
             false,
             true,
+        ])
+    })
+
+
+    test('isIdEvent', () => {
+        expect(allEvents.map(isIdEvent)).toEqual([
+            false,
+            false,
+            false,
+            true,
+            true,
+            false,
+            false
         ])
     })
 })
