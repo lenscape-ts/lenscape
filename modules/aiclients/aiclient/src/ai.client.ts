@@ -15,6 +15,8 @@ export type AiOptions = {
     logit?: string[] // this encourages those words to be used. The client needs to tokenise the words and use the first tokens. Buff is probability is
     customisation?: any
 }
+
+
 export type AiClient = (prompt: BaseMessage[], options?: AiOptions) => Promise<BaseMessage[]>
 export type AiClients = NameAnd<AiClient>
 

@@ -1,0 +1,20 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/storage_crypto",
+  "description": "Crypto for storage",
+  "packageJson": {
+    "dependencies": {
+    },
+    "devDependencies": {
+    }
+  },
+  "links": [
+    "@lenscape/errors",
+    "@lenscape/validate"
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true
+  }
+}

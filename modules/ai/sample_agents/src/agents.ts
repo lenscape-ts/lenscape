@@ -29,6 +29,38 @@ A RAG search has been performed on the question and the top 3 results are provid
     }
 }
 
+export const jira: AgentCard<Context, Pipelines> = {
+    purpose: 'Answers questions about Jira, the issue tracking and project management tool.',
+    samples: [
+        'what are my open issues in Jira?',
+        'What is last sprints goal?',
+        'How many items are in the backlog?',
+    ],
+    tags: ['jira', 'project management', 'issue tracking'],
+    pipeline: {
+        categorise: {
+            type: "categorisellm",
+            prompt: [],
+            model: 'openai',
+            //some logit.
+        },
+        tool: {
+            type: 'mcp',
+            mcp: 'jira'
+        },
+        llm: {
+            type: 'llm',
+            agent: 'openai',
+            prefix: [
+                {
+                    role: 'system', content: `You are an expert in answering questions about Jira, the issue tracking and project management tool. You will be given a question and you will use the categorise tool to determine the type of question, then you will use the tool to answer the question.`
+
+                }
+            ]
+        }
+    }
+}
+
 export const generalCompany: AgentCard<Context, Pipelines> = {
     purpose: 'This agent answers general questions about the company, and the tools the company uses. It uses a RAG search to find relevant documents, which are typically in the form of question and answer pairs.',
     samples: [
@@ -64,7 +96,7 @@ A RAG search has been performed on the question and the top 3 results are provid
 }
 
 export const agentCards: AgentCards<Context, Pipelines, Selector> = {
-    cards: {apps, generalCompany},
+    cards: {apps, generalCompany, jira},
     selector: {
         type: 'llm',
         model: 'openai',
@@ -72,10 +104,12 @@ export const agentCards: AgentCards<Context, Pipelines, Selector> = {
             {
                 role: 'system',
                 content: `
-You are to decide which agent to use based on the conversation. Your result will be a single word which is the name of the agent to use. If you are not sure, say "generalCompany".
+You are to decide which agent to use based on the conversation. Your result will be a single word which is the name of the agent to use. If you are not sure, say "\${context.selection} which is the current selection".
 The next message is a list of the agents available to you, and their purpose. You will also be given the conversation so far, which is a list of messages.
 
 Please be careful when giving your answer, as it will be used to select the agent to use. The only legal names are \${agentNames}
+
+The c
 `
             },
             {role: 'system', content: '${agentDetails}'}

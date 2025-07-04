@@ -1,6 +1,4 @@
-import {AgentCard, AgentCards, ContextWithQuery, MessagesOrName} from "@lenscape/agents";
-import {LlmPipelineDetails} from "@lenscape/llm_agents";
-import {RagPipelineDetails} from "@lenscape/rag_agents";
+import {AgentCard, AgentCards} from "@lenscape/agents";
 import {Context, Pipelines, Selector} from "./domain";
 
 export const ragDrivenAgentCard: AgentCard<Context, Pipelines> = {
@@ -33,12 +31,18 @@ Then based on the index of the most relevant document, it uses a specific LLM to
                     type: 'llm',
                     agent: 'openai',
                     prefix: [
-                        {role: 'system', content: 'You are an expert in answering questions about the company and the apps that have been installed on the system. These are general office work and productivity apps. A RAG search has been performed on the question and the top 3 results are provided below.'}],
+                        {
+                            role: 'system',
+                            content: 'You are an expert in answering questions about the company and the apps that have been installed on the system. These are general office work and productivity apps. A RAG search has been performed on the question and the top 3 results are provided below.'
+                        }],
                 },
                 'semantic-azureblob-prod': {
                     type: 'llm',
                     agent: 'openai',
-                    prefix: [{role: 'system', content: 'You are an expert in answering questions about the company, and the tools the company uses. It uses a RAG search to find relevant documents, which are typically in the form of question and answer pairs. A RAG search has been performed on the question and the top 3 results are provided below.'}],
+                    prefix: [{
+                        role: 'system',
+                        content: 'You are an expert in answering questions about the company, and the tools the company uses. It uses a RAG search to find relevant documents, which are typically in the form of question and answer pairs. A RAG search has been performed on the question and the top 3 results are provided below.'
+                    }],
                 }
             },
             defaultPipeline: {
