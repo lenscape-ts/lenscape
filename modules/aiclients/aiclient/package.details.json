@@ -1,0 +1,26 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/aiclient",
+  "description": "AI Client",
+  "packageJson": {
+    "dependencies": {
+      "axios": "${properties.axios}"
+    },
+    "devDependencies": {},
+    "browser": {
+      "child_process": false
+    }
+  },
+  "links": [
+    "@lenscape/arrays",
+    "@lenscape/auth",
+    "@lenscape/errors",
+    "@lenscape/records",
+    "@lenscape/time"
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": false
+  }
+}

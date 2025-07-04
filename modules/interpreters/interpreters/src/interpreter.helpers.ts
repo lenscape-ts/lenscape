@@ -26,7 +26,8 @@ export const getAllValuesAndErrorsFromIds = async <T>(asyncStore: GetAsyncStore<
 }
 export const getAllValuesFromIds = async <T>(asyncStore: GetAsyncStore<string, T>, events: BaseEvent[]): Promise<ErrorsOr<Map<string, T>>> => {
     const {idToValues, idToErrors} = await getAllValuesAndErrorsFromIds(asyncStore, events)
-    const errors = Object.values(idToErrors);
+    const errors: Errors[] = Object.values(idToErrors);
+    // @ts-ignore -- for some reason jest gives us issues with flatMap here
     if (errors.length > 0) return {errors: errors.flatMap(e => e.errors)}
     return {value: idToValues}
 }

@@ -1,0 +1,33 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/rag_agents",
+  "description": "The interface for agents using rag",
+  "links": [
+    "@lenscape/agents",
+    "@lenscape/aiclient",
+    "@lenscape/arrays",
+    "@lenscape/errors",
+    "@lenscape/events",
+    "@lenscape/lens",
+    "@lenscape/string_utils",
+    "@lenscape/records"
+  ],
+  "packageJson": {
+    "files": [
+      "build/"
+    ],
+    "dependencies": {
+    },
+    "devDependencies": {
+    },
+    "scripts": {
+      "start": "react-scripts start"
+    }
+  },
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true,
+    "react": false
+  }
+}

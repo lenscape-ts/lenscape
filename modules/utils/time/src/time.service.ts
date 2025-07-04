@@ -1,6 +1,6 @@
-export type TimeService = () => Date;
+export type TimeService = () => number;
 
-export const dateTimeService: TimeService = () => new Date();
+export const dateTimeService: TimeService = () => new Date().getTime();
 //Later we will do this with a context so that we can mock the time service
 export function useTime(): TimeService {
     return dateTimeService;

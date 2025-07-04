@@ -1,0 +1,24 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/llmselector",
+  "description": "A selector for agents. Uses an LLM to select the best agent for a given task.",
+  "packageJson": {
+    "dependencies": {
+      "axios": "${properties.axios}"
+    },
+    "devDependencies": {},
+    "browser": {
+      "child_process": false
+    }
+  },
+  "links": [
+    "@lenscape/aiclient",
+    "@lenscape/agents",
+    "@lenscape/errors"
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": false
+  }
+}

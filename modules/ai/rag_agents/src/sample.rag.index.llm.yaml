@@ -1,0 +1,35 @@
+pipelines:
+  rag:
+    type: 'rag.index.llm',
+    source: 'elasticsearch',
+    indices: [ 'index1', 'index2' ],
+    top: 5,
+    pipelines:
+      index1:
+        llm: {
+          type: 'llm',
+          agent: 'openai',
+          prefix: [
+            {
+              role: 'system',
+              content: `
+                You are an expert in answering questions the company and the tools the company uses. It uses a RAG search to find relevant documents, which are typically in the form of question and answer pairs.
+              A RAG search has been performed on the question and the top 3 results are provided below.`
+            }
+          ]
+        }
+      index2: index2llm
+
+
+  index2llm:
+    type: 'llm',
+    main: false
+    agent: 'openai',
+    prefix: [
+      {
+        role: 'system',
+        content: `
+          You are an expert in answering questions the company and the tools the company uses. It uses a RAG search to find relevant documents, which are typically in the form of question and answer pairs.
+        A RAG search has been performed on the question and the top 3 results are provided below.`
+      }
+    ]

@@ -1,0 +1,174 @@
+active-agents:
+  - jql
+  - training
+  - orderit
+  - itsm
+
+categorisation:
+  llm:
+    model: gpt-4
+    prompt: 'some reference to a prompt'
+
+agents:
+
+  hr:
+    purpose: |
+      This agent is designed to assist with HR-related queries.
+      It can provide information about employee benefits, policies, and procedures.
+    samples:
+      - What are the employee benefits?
+      - How do I apply for leave?
+      - What is the process for performance reviews?
+    pipeline:
+      - type: rag
+        indicies:
+          - dr-hr-prod
+          - se-hr-prod
+          - en-hr-prod
+          - eon-hr-prod
+      - type: llm
+        prompt: 'some reference to a prompt'
+
+
+  jql:
+    purpose: |
+      This agent is designed to answer questions about Jira projects using JQL (Jira Query Language).
+      It can provide insights into issues, sprints, and project status.
+    samples:
+      - What are the top 10 issues in the project?
+      - How many issues are in the backlog?
+      - what was last sprints velocity?
+      - what was the goal of the last sprint?
+    pipeline:
+      - work-out-jql-call:
+          knn:
+            - jq-known-queries-prod
+          result: jsonfor jql
+      - call-jira-api:
+          mcp: jira
+          tool: call-jira-api
+      - llm:
+          model: gpt-4
+          prompt: 'some reference to a prompt'
+
+
+  training:
+    purpose: |
+      This agent is designed to assist with training-related queries.
+      It can provide information about training schedules, available courses, and registration details.
+    samples:
+      - What training courses are available this month?
+      - How do I find gitlab training materials?
+      - Can I get better at project management?
+    pipeline:
+      - rag:
+          knn:
+            - my-genius-api
+          top: 3
+      - llm:
+          prompt: 'some reference to a prompt'
+
+  orderit:
+    purpose: |
+      This agent is designed to assist with order-related queries.
+      It can provide information about order status, delivery times, and product availability.
+    samples:
+      - how can I order a new laptop?
+      - how can I order a new phone?
+      - How can I order git bash client?
+      - How can I order SAP GUI client?
+    pipeline:
+      - rag:
+          knn:
+            - order-it-prod
+          top: 3
+      - llm:
+          prompt: 'some reference to a prompt'
+
+
+  itsm:
+    purpose: |
+      This agent is designed to assist with IT Service Management (ITSM) queries.
+      It can provide information about incident management, service requests, and change management.
+    samples:
+      - How do I raise a ticket for a new laptop?
+      - What is the process for changing my password?
+      - How can I report a network issue?
+      - My laptop is slow
+    pipeline:
+      chain:
+        - condition:
+            name: itsm-next-think
+            knn:
+              - itsm-nextthink-prod
+            relevancyMin: 0.5
+          agent: itsm-next-think
+        - condition:
+            name: itsm-knowledge-assistant
+            knn:
+              - ka-prod
+            relevancyMin: 0.5
+            agent: itsm-knowledge-assistant
+        - default:
+            agent: itsm-more-info
+
+  itsm-next-think:
+    purpose: |
+      This agent is designed to assist with IT Service Management (ITSM) queries using NextThink.
+      It can provide insights into user experience, device performance, and IT service health.
+    samples:
+      Fix my laptop
+    pipeline:
+      - ragvariable: itsm-next-think
+      - llm:
+          prompt: some reference to a prompt
+
+  itsm-knowledge-assistant:
+    purpose: |
+      This agent is designed to assist with IT Service Management (ITSM) queries using Knowledge Assistant.
+      It can provide information about IT services, troubleshooting steps, and best practices.
+    samples:
+      - How do I reset my password?
+      - What should I do if my laptop won't start?
+    pipeline:
+      - ragvariable: itsm-knowledge-assistant
+      - llm:
+          prompt: some reference to a prompt
+
+
+Email:
+  environment.
+  what we are testing.
+  What are we replacing
+  expecting
+  
+  No need for rollback
+  
+  
+  Hi Sindu
+  
+  As you know we have rewriten a worker so that it can take the place of multiple of the existing workers. At the moment it just does AML, but Anand will be adding fraud and affordability to it in the near future
+  
+  We want to test this worker in the dev environment (Anand please check I got the environment correct). In order to do this we have the following approach
+  * We have created a new process diagram that is the same as the old process diagram (cloned)
+  * We updated AML in this new process diagram so that it has a new name (different to the existing)
+  
+  Our proposal is to run some of the normal tests through this new process diagram. Instead of using the existing aml worker, it will use our aml worker.
+  
+  There is a possible failure mode, so we want to test it at a safe time. If the existing java workers listen to the kafka response topics and try to 'complete' tasks that they didn't initiate then the same task will be 'completed' more than once. We beleive (but because we are denied access to the source code of the libraries we can't easily check) that the existing java workers will be well behaved. The purpose of this test is to validate that they are well behaved (and that our workers are similarly well behaved)
+  
+  Should the existing java workers work the way we want, then we will be 'decoupled' from the existing code. We will be able to run in the dev environment at the same time as they are, and there will be no interactions between them.
+
+Rollback strategy: we just remove our worker from the environment. We won't have made any changes to the existing environment other than deploying our own worker and a new process diagram (which doesn't do anything unless we want it to).
+
+Summary:
+  * We select three days next week, 6am to 8am CET
+  * We push our worker to the dev environment
+  * We run a test against our new process diagram (same as old but with new topic id for aml)
+  * We check the error logs of the existing aml worker, and of our aml worker
+  * If we don't have errors, then we can be confident that the two can run in parallel at the same time without interfering with each other
+  * Our roll back is just to rollback the deployment of our worker
+
+
+
+

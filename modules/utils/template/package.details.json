@@ -1,0 +1,15 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/template",
+  "description": "A small template language",
+  "links": [
+    "@lenscape/errors",
+    "@lenscape/records",
+    "@lenscape/safe"
+  ],
+  "guards": {
+    "publish": true,
+    "test": true,
+    "compile": true
+  }
+}

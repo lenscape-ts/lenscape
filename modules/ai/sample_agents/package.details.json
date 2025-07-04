@@ -1,0 +1,39 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/sample_agents",
+  "description": "An example of how to use agents with Lenscape",
+  "links": [
+    "@lenscape/agents",
+    "@lenscape/arrays",
+    "@lenscape/elastic_search_rag",
+    "@lenscape/errors",
+    "@lenscape/events",
+    "@lenscape/lens",
+    "@lenscape/llm_agents",
+    "@lenscape/llmselector",
+    "@lenscape/openai",
+    "@lenscape/string_utils",
+    "@lenscape/rag_agents",
+    "@lenscape/records",
+    "@lenscape/template"
+  ],
+  "packageJson": {
+    "files": [
+      "build/"
+    ],
+    "dependencies": {
+      "axios": "${properties.axios}"
+    },
+    "devDependencies": {
+    },
+    "scripts": {
+      "start": "react-scripts start"
+    }
+  },
+  "guards": {
+    "compile": true,
+    "publish": false,
+    "test": false,
+    "react": false
+  }
+}

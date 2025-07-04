@@ -6,7 +6,7 @@ describe('TimeService', () => {
         const now = new Date();
         const serviceNow = timeService();
 
-        expect(serviceNow.getTime()).toBeCloseTo(now.getTime(), -1);
+        expect(serviceNow).toBeCloseTo(now.getTime(), -1);
     });
 
     it('useTime should return dateTimeService by default', () => {

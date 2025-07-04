@@ -1,0 +1,23 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/openai",
+  "description": "Client for openai",
+  "packageJson": {
+    "dependencies": {
+      "axios": "${properties.axios}",
+      "tiktoken": "1.0.21"
+    },
+    "devDependencies": {},
+    "browser": {
+      "child_process": false
+    }
+  },
+  "links": [
+    "@lenscape/aiclient"
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": false
+  }
+}

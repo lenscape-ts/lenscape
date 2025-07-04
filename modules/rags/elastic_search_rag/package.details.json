@@ -1,0 +1,35 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/elastic_search_rag",
+  "description": "How we do RAG with Elastic Search",
+  "links": [
+    "@lenscape/agents",
+    "@lenscape/aiclient",
+    "@lenscape/arrays",
+    "@lenscape/errors",
+    "@lenscape/events",
+    "@lenscape/lens",
+    "@lenscape/string_utils",
+    "@lenscape/rag_agents",
+    "@lenscape/records"
+  ],
+  "packageJson": {
+    "files": [
+      "build/"
+    ],
+    "dependencies": {
+      "axios": "${properties.axios}"
+    },
+    "devDependencies": {
+    },
+    "scripts": {
+      "start": "react-scripts start"
+    }
+  },
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true,
+    "react": false
+  }
+}

@@ -37,7 +37,7 @@ export function makeErrorFromException(
     extras?: any,
 ): Errors {
     const message = err instanceof Error ? err.message : String(err);
-    return { errors: [`${context} error ${message}`], extras };
+    return {errors: [`${context} error ${message}`], extras};
 }
 
 /**
@@ -115,7 +115,7 @@ export function partitionNameAndErrorsOr<T>(
         if (isValue(value)) values[name] = value.value;
         else errors.push(...value.errors);
     }
-    return { values, errors };
+    return {values, errors};
 }
 
 /**
@@ -158,7 +158,7 @@ export function mapErrorsOr<T, T1>(
     e: ErrorsOr<T>,
     f: (t: T) => T1,
 ): ErrorsOr<T1> {
-    if (isValue(e)) return { value: f(e.value) };
+    if (isValue(e)) return {value: f(e.value)};
     return e;
 }
 
@@ -190,7 +190,7 @@ export function mapErrorsOrK<T, T1>(
     e: ErrorsOr<T>,
     f: (t: T) => Promise<T1>,
 ): Promise<ErrorsOr<T1>> {
-    return isValue(e) ? f(e.value).then((v) => ({ value: v })) : Promise.resolve(e as ErrorsOr<T1>);
+    return isValue(e) ? f(e.value).then((v) => ({value: v})) : Promise.resolve(e as ErrorsOr<T1>);
 }
 
 /**
@@ -244,3 +244,16 @@ export type AsyncErrorCall2<From1, From2, To> = (
     from1: From1,
     from2: From2,
 ) => Promise<ErrorsOr<To>>;
+
+
+export function flattenArrayOfErrorsOr<T>(
+    es: ErrorsOr<T>[],
+): ErrorsOr<T[]> {
+    const values: T[] = [];
+    const errors: string[] = [];
+    for (const e of es) {
+        if (isValue(e)) values.push(e.value);
+        else errors.push(...e.errors);
+    }
+    return errors.length > 0 ? {errors} : {value: values};
+}

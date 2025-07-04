@@ -1,0 +1,14 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/safe",
+  "description": "things like safeArray and safeObject that ensure we don't throw errors when accessing properties",
+  "links": [
+    "@lenscape/errors",
+    "@lenscape/records"
+  ],
+  "guards": {
+    "publish": true,
+    "test": true,
+    "compile": true
+  }
+}

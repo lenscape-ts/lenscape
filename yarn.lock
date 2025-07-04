@@ -7328,6 +7328,11 @@ test-exclude@^6.0.0:
     glob "^7.1.4"
     minimatch "^3.0.4"
 
+tiktoken@1.0.21:
+  version "1.0.21"
+  resolved "https://registry.yarnpkg.com/tiktoken/-/tiktoken-1.0.21.tgz#434f4c67ccda114cdfb19a180b93d9be8bc396be"
+  integrity sha512-/kqtlepLMptX0OgbYD9aMYbM7EFrMZCL7EoHM8Psmg2FuhXoo/bH64KqOiZGGwa6oS9TPdSEDKBnV2LuB8+5vQ==
+
 tmpl@1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.5.tgz#8683e0b902bb9c20c4f726e3c0b69f36518c07cc"
