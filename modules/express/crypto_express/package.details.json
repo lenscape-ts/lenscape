@@ -1,0 +1,23 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/crypto_express",
+  "description": "An endpoint for the crypto metadata. Provides the data to code/decode data, and the crypto keys for storage.",
+  "packageJson": {
+    "dependencies": {
+    },
+    "devDependencies": {
+      "jwt-decode": "${properties.jwt-decode}"
+    }
+  },
+  "links": [
+    "@lenscape/errors",
+    "@lenscape/express",
+    "@lenscape/storage_crypto",
+    "@lenscape/validate"
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true
+  }
+}

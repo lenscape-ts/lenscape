@@ -22,7 +22,9 @@ export function wrappedKey(headers: NameAnd<string>, name: string, errors: strin
     return {wrappedKey, iv}
 }
 
-export function cryptoMetadataFromHeaders(headers: NameAnd<string>, legalFingerprints: string[]): ErrorsOr<CryptoMetadata> {
+export type CryptoMetadataFromHeaders = (headers: NameAnd<string>, legalFingerprints: string[]) => ErrorsOr<CryptoMetadata>;
+
+export const cryptoMetadataFromHeaders: CryptoMetadataFromHeaders = (headers: NameAnd<string>, legalFingerprints: string[]): ErrorsOr<CryptoMetadata> => {
     const errors: string[] = [];
     const admin: NameAnd<WrappedKey> = {}
     const value: CryptoMetadata = {
@@ -41,4 +43,4 @@ export function cryptoMetadataFromHeaders(headers: NameAnd<string>, legalFingerp
     if (!legalFingerprints.includes(value.globalFingerprint))
         errors.push(`Fingerprint was ${value.globalFingerprint}. This was illegal: should have been one of ${legalFingerprints}`)
     return errors.length > 0 ? {errors} : {value};
-}
+};

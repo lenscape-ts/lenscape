@@ -1,0 +1,22 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/express",
+  "description": "The interfaces and base implementations for apis / guis using express",
+  "packageJson": {
+    "dependencies": {
+    },
+    "devDependencies": {
+      "express": "${properties.express}"
+
+    }
+  },
+  "links": [
+    "@lenscape/errors",
+    "@lenscape/validate"
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true
+  }
+}

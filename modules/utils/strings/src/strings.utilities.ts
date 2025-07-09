@@ -116,3 +116,19 @@ export function firstSegment ( s: string, marker: string | RegExp = pathMarker )
     if ( parts.length === 0 ) return s
     return parts[ 0 ]
 }
+
+/**
+ * Partition a string into “first two / next two / the rest”
+ * @param name – input string
+ * @returns partitioned string: “ab/cd/efghij”
+ * @throws if name.length < 5
+ */
+export function toGitStoragePath(name: string): string {
+    if (name.length < 5) {
+        throw new Error(`toGitStoragePath: input must be at least 5 chars, got ${name.length}: ${name}`);
+    }
+    const first  = name.slice(0, 2);
+    const second = name.slice(2, 4);
+    const rest   = name.slice(4);
+    return `${first}/${second}/${rest}`;
+}

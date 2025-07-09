@@ -10,20 +10,21 @@
   "properties": {
     "axios": "1.7.2",
     "axios-mock-adapter": "^2.1.0",
-    "license": "MIT",
-    "@types/express": "^5.0.2",
+    "cheerio": "^1.0.0-rc.12",
     "express": "^5.1.0",
-    "repository": "git@github.com:intellimaintain/intellimaintain.git",
-    "laobanVersion": "1.4.51",
     "focusonVersion": "1.44.3",
     "itsmworkbench": "0.3.12",
+    "jwt-decode": "^4.0.0",
+    "license": "MIT",
+    "laobanVersion": "1.4.51",
     "xlsx": "^0.18.5",
-    "cheerio": "^1.0.0-rc.12",
     "openapi": "4.58.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "repository": "git@github.com:intellimaintain/intellimaintain.git",
     "tiktoken": "1.0.21",
-    "xml2js": "^0.6.2"
+    "xml2js": "^0.6.2",
+    "@types/express": "^5.0.2"
   },
   "templates": {
     "typescript": "templates/typescript",

@@ -1,4 +1,4 @@
-import {allButLastSegment, camelCase, camelCaseToWords, capitalizeFirstLetter, ellipsesInMiddle, firstSegment, lastSegment, nameWithOptions, parseAttributeValue} from "./strings.utilities";
+import {allButLastSegment, camelCase, camelCaseToWords, capitalizeFirstLetter, ellipsesInMiddle, firstSegment, lastSegment, nameWithOptions, parseAttributeValue, toGitStoragePath} from "./strings.utilities";
 
 describe("camelCaseToWords", () => {
     it("converts simple camelCase strings to words", () => {
@@ -236,3 +236,14 @@ describe("firstSegment", () => {
         expect(firstSegment(undefined, '.')).toEqual(undefined)
     })
 })
+describe('toGitStoragePath', () => {
+    it('partitions long names correctly', () => {
+        expect(toGitStoragePath('abcdefghij')).toBe('ab/cd/efghij');
+    });
+    it('works on exactly 5 chars', () => {
+        expect(toGitStoragePath('12345')).toBe('12/34/5');
+    });
+    it('throws on short names', () => {
+        expect(() => toGitStoragePath('abcd')).toThrow(/at least 5 chars/);
+    });
+});

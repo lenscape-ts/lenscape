@@ -1,0 +1,23 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/express_api",
+  "description": "The api for crypto metadata.",
+  "packageJson": {
+    "dependencies": {
+    },
+    "devDependencies": {
+    }
+  },
+  "links": [
+    "@lenscape/errors",
+    "@lenscape/crypto_express",
+    "@lenscape/express",
+    "@lenscape/storage_crypto",
+    "@lenscape/validate"
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true
+  }
+}

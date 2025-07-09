@@ -8,7 +8,8 @@ import {adminBase} from "./crypto.metadata.from.headers";
  * @param meta  The CryptoMetadata describing how to decrypt the blob.
  * @returns     A map of header names → header values, ready to spread into your axios PUT.
  */
-export function cryptoMetadataToHeaders(meta: CryptoMetadata): NameAnd<string> {
+export type CryptoMetadataToHeadersFn = (meta: CryptoMetadata) => NameAnd<string>;
+export const cryptoMetadataToHeaders:CryptoMetadataToHeadersFn = (meta: CryptoMetadata): NameAnd<string> => {
     const headers: NameAnd<string> = {};
 
     headers[`${adminBase}keyversion`] = meta.keyVersion.toString();
@@ -23,4 +24,4 @@ export function cryptoMetadataToHeaders(meta: CryptoMetadata): NameAnd<string> {
     headers[`${adminBase}admin-wrappedkey`] = meta.admin.wrappedKey;
 
     return headers;
-}
+};
