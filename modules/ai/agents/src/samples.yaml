@@ -135,6 +135,17 @@ agents:
       - llm:
           prompt: some reference to a prompt
 
+  general-search:
+    purpose: |
+      This agent is designed to provide general search capabilities across various data sources.
+      It can answer questions, provide information, and assist with general inquiries.
+    samples:
+      - devops training
+      - sprint 13
+    pipeline:
+      - search:
+           indicies:
+
 
 Email:
   environment.

@@ -1,5 +1,5 @@
 import {AxiosResponse, AxiosStatic} from "axios";
-import {CryptoMetadataFromHeaders, CryptoMetadataToHeadersFn, StorageDecodeFn, StorageEncodeFn} from "@lenscape/storage_crypto";
+import {CryptoMetadataFromHeaders, CryptoMetadataToHeadersFn, StorageDecodeFn, InitialStorageEncodeFn} from "@lenscape/storage_crypto";
 import {azureBlobStorage, azureBlobStore} from "./azure.async.storage";
 import {errorsOrThrow, valueOrThrow} from "@lenscape/errors";
 
@@ -11,7 +11,7 @@ describe('azureBlobStore.store with injectable helpers', () => {
     const cryptoConfig = {} as any;
 
     let axiosMock: Partial<AxiosStatic>;
-    let encodeFn: jest.MockedFunction<StorageEncodeFn>;
+    let encodeFn: jest.MockedFunction<InitialStorageEncodeFn>;
     let encodeInvoke: jest.Mock;
     let metaFn: jest.MockedFunction<CryptoMetadataToHeadersFn>;
     let headersMock: Record<string, string>;

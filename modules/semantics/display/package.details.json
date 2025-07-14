@@ -1,0 +1,23 @@
+{
+  "template": "react",
+  "name": "@lenscape/semantics_display",
+  "description": "k means clustering then semantic averaging of embeddings",
+  "packageJson": {
+    "dependencies": {
+      "chart.js": "${properties.chartjs}",
+      "react-chartjs-2": "${properties.react-chartjs-2}"
+    },
+    "devDependencies": {},
+    "browser": {
+      "child_process": false
+    }
+  },
+  "links": [
+    "@lenscape/semantics_kmeans"
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true
+  }
+}

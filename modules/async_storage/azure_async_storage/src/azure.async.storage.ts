@@ -1,5 +1,5 @@
 import {ErrorsOr, isErrors} from "@lenscape/errors";
-import {CryptoConfig, CryptoMetadata, cryptoMetadataFromHeaders, CryptoMetadataFromHeaders, cryptoMetadataToHeaders, CryptoMetadataToHeadersFn, defaultStorageDecodeFn, defaultStorageEncodeFn, StorageDecodeFn, StorageEncodeFn} from "@lenscape/storage_crypto";
+import {CryptoConfig, CryptoMetadata, cryptoMetadataFromHeaders, CryptoMetadataFromHeaders, cryptoMetadataToHeaders, CryptoMetadataToHeadersFn, defaultStorageDecodeFn, defaultStorageEncodeFn, StorageDecodeFn, InitialStorageEncodeFn} from "@lenscape/storage_crypto";
 import {AxiosResponse, AxiosStatic} from "axios";
 import {StoreGetAsyncStore} from "@lenscape/async_storage";
 
@@ -11,7 +11,7 @@ export type AzureBlobStorageConfig = {
     version: string
     blobNameFn: (id: string) => string
     axios: AxiosStatic
-    _storageEncodeFn?: StorageEncodeFn
+    _storageEncodeFn?: InitialStorageEncodeFn
     _storageDecodeFn?: StorageDecodeFn
     _cryptoMetadataToHeadersFn?: CryptoMetadataToHeadersFn
     _cryptoMetadataFromHeaders?: CryptoMetadataFromHeaders

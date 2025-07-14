@@ -1,0 +1,25 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/semantics_kmeans",
+  "description": "k means clustering then semantic averaging of embeddings",
+  "packageJson": {
+    "dependencies": {
+      "ml-kmeans": "${properties.@mljs/kmeans}",
+      "ml-matrix": "${properties.ml-matrix}"
+    },
+    "devDependencies": {},
+    "browser": {
+      "child_process": false
+    }
+  },
+  "links": [
+    "@lenscape/aiclient",
+    "@lenscape/agents",
+    "@lenscape/errors"
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true
+  }
+}

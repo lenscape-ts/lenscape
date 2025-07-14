@@ -1,0 +1,5 @@
+export * from './src/elbow'
+export * from './src/kmeans.clustering'
+export * from './src/labeledVector'
+export * from './src/load.embeddings'
+export * from './src/pca'
