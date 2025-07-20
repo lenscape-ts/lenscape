@@ -43,7 +43,27 @@ export function collect<T, Child extends T>(ts: T[], guard: (ta: T) => ta is Chi
     return ts.filter(guard);
 }
 
-export function toArray<T>(ts: T | T[]|undefined): T[] {
+export function toArray<T>(ts: T | T[] | undefined): T[] {
     if (ts === undefined) return [];
     return Array.isArray(ts) ? ts : [ts];
+}
+
+export function chunkArray<T>(items: T[], chunkSize: number): T[][] {
+    const result: T[][] = [];
+    for (let i = 0; i < items.length; i += chunkSize) {
+        result.push(items.slice(i, i + chunkSize));
+    }
+    return result;
+}
+
+export function chunkAndMapArrays<T, T1>(chunkSize: number, processFn: (chunk: T[]) => Promise<T1[]>): ((ts: T[]) => Promise<T1[]>) {
+    return async ts => {
+        const result: T1[] = [];
+        const chunks = chunkArray(ts, chunkSize);
+        for (const chunk of chunks) {
+            const processedChunk = await processFn(chunk);
+            result.push(...processedChunk);
+        }
+        return result
+    }
 }

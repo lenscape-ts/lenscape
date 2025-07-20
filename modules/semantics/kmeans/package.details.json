@@ -5,7 +5,8 @@
   "packageJson": {
     "dependencies": {
       "ml-kmeans": "${properties.@mljs/kmeans}",
-      "ml-matrix": "${properties.ml-matrix}"
+      "ml-matrix": "${properties.ml-matrix}",
+      "tsne-js": "${properties.tsne-js}"
     },
     "devDependencies": {},
     "browser": {

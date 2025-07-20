@@ -1,0 +1,21 @@
+{
+  "template": "react",
+  "name": "@lenscape/semantics_check",
+  "description": "type a query see the effectiveness",
+  "packageJson": {
+    "dependencies": {
+      "axios": "${properties.axios}"
+    },
+    "devDependencies": {},
+    "browser": {
+      "child_process": false
+    }
+  },
+  "links": [
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true
+  }
+}
