@@ -5,7 +5,7 @@
   "packageJson": {
     "dependencies": {
       "axios": "${properties.axios}",
-      "tiktoken": "${properties.tiktoken}"
+      "gpt-tokenizer": "${properties.gpt-tokenizer}"
     },
     "devDependencies": {
       "axios-mock-adapter": "${properties.axios-mock-adapter}"

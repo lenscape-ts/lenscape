@@ -2,8 +2,12 @@ import React from "react";
 import {createRoot} from "react-dom/client";
 import {SemanticSearchApp} from "./app";
 import {ElasticSearchProvider} from "./elasticSearchConfig";
-import {NameAnd} from "@lenscape/records";
+import {Env, NameAnd} from "@lenscape/records";
 import {Questions} from "./display/questions";
+import {defaultOpenAiConfig, openAiClient} from "@lenscape/openai";
+import axios from "axios";
+import {AiClientProvider} from "./aiconfig";
+import {openAiToken} from "./secrets";
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 // const model_id = 'intfloat__multilingual-e5-large'
@@ -56,10 +60,13 @@ const questionList: Questions = {
     ]
 }
 export type Question = NameAnd<string[]>;
-root.render(<React.StrictMode>
+const aiClient = openAiClient(defaultOpenAiConfig(axios, {OPENAI_TOKEN: openAiToken}))
+
+root.render(<React.StrictMode><AiClientProvider aiClient={aiClient}>
     <ElasticSearchProvider elasticSearchConfig={elasticSearchConfig}>
         <SemanticSearchApp questions={questionList}/>
     </ElasticSearchProvider>
+</AiClientProvider>
 
 </React.StrictMode>)
 

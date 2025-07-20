@@ -7,6 +7,7 @@ import {SimpleQuery} from "./display/simple.query";
 import {SelectButton} from "./display/selectButton";
 import {HasQuestions} from "./display/questions";
 import {AppChildProps} from "./appProps";
+import {WhichAgent} from "./agents/agents";
 
 
 export const SemanticSearchApp: React.FC<HasQuestions> = ({questions}) => {
@@ -20,12 +21,13 @@ export const SemanticSearchApp: React.FC<HasQuestions> = ({questions}) => {
         knn: <KnnSearch {...childProps} />,
         compare: <Compare {...childProps}/>,
         query: <SimpleQuery {...childProps} />,
+        agents: <WhichAgent {...childProps} />,
     };
 
     return (
         <div>
             <div style={{marginBottom: '1rem'}}>
-                {['knn', 'compare', 'query'].map(option => (
+                {Object.keys(views).map(option => (
                     <SelectButton key={option} ops={selectedOps} text={option}/>
                 ))}
             </div>
