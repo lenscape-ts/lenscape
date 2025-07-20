@@ -5,13 +5,12 @@ import {useElasticSearchContext} from "../elasticSearchConfig";
 import {ShowJson} from "./show,json";
 import {cosineSimilarity} from "../helpers/cosineSimilarity";
 import {KnnResult} from "./knn.search";
-import {AppChildProps, HasQuestions} from "../appProps";
-import {GetterSetter} from "@lenscape/context";
+import {AppChildProps} from "../appProps";
 import {TwoColumnAndRestLayout} from "./two.column.and.rest.layout";
 import {NameAnd} from "@lenscape/records";
-import {Simulate} from "react-dom/test-utils";
 import {ellipsesInMiddle} from "@lenscape/string_utils";
 import {MultiSelect} from "./multiselect";
+import {HasQuestionOps, HasQuestions, QuestionBar, questionOptions} from "./questions";
 
 
 export type SimpleQueryResultDisplayProps = {
@@ -39,26 +38,24 @@ export function SimpleQueryResultDisplay({results}: SimpleQueryResultDisplayProp
     </table>
 }
 
-export type QuestionsDisplayProps = {
-    questions: string[]
-    questionOps: GetterSetter<string>
+export type QuestionsDisplayProps = AppChildProps & {
     indexOrIndices: string
-    queryVector: number[]
 }
 
 type QuestionToSimiliarty = NameAnd<number>
 type QuestionToKeyfield = NameAnd<string>
 
-export function QuestionsDisplay({questions, questionOps, indexOrIndices, queryVector}: QuestionsDisplayProps) {
+export function QuestionsDisplay({questions, mainQueryOps, questionOps, indexOrIndices}: QuestionsDisplayProps) {
     const [selected, setSelected] = questionOps;
     const [nameToNumber, setNameToNumber] = useState<QuestionToSimiliarty>({})
     const [nameToKeyfield, setNameToKeyfield] = useState<QuestionToKeyfield>({});
     const esConfig = useElasticSearchContext()
+    const activeQuestions = useMemo(() => questionOptions(questions, questionOps[0]), [questions, questionOps[0]])
     useEffect(() => {
         setNameToNumber({})
 
         async function findQuestionData() {
-            for (const question of questions) {
+            for (const question of activeQuestions) {
                 const queryVector = await vectorise(esConfig, question)
                 const res = await knnSubmit(esConfig, indexOrIndices, question)
                 setNameToNumber(old => ({
@@ -75,7 +72,7 @@ export function QuestionsDisplay({questions, questionOps, indexOrIndices, queryV
         }
 
         findQuestionData();
-    }, [questions, indexOrIndices]);
+    }, [activeQuestions, indexOrIndices, questionOps[0]]);
     return (
         <table style={{borderCollapse: "collapse", width: "100%", fontFamily: "sans-serif"}}>
             <thead>
@@ -86,10 +83,13 @@ export function QuestionsDisplay({questions, questionOps, indexOrIndices, queryV
             </tr>
             </thead>
             <tbody>
-            {questions.map((question, index) => (
+            {activeQuestions.map((question, index) => (
                 <tr
                     key={index}
-                    onClick={() => setSelected(question)}
+                    onClick={() => {
+                        // setSelected(question);
+                        mainQueryOps[1](question);
+                    }}
                     style={{
                         cursor: "pointer",
                         backgroundColor: question === selected ? "#e6f7ff" : "white",
@@ -111,7 +111,7 @@ export function QuestionsDisplay({questions, questionOps, indexOrIndices, queryV
 }
 
 
-export function SimpleQuery({mainQueryOps, questions}: AppChildProps & HasQuestions) {
+export function SimpleQuery({mainQueryOps, questions, questionOps}: AppChildProps & HasQuestions) {
     const query = mainQueryOps[0];
     const config = useElasticSearchContext()
     const [raw, setRaw] = useState<KnnSubmitResult[]>([])
@@ -124,7 +124,7 @@ export function SimpleQuery({mainQueryOps, questions}: AppChildProps & HasQuesti
         knnSubmit(config, indexOrIndices, query, {size: 20}).then(res => setRaw(res))
         vectorise(config, query).then(v => setVector(v))
 
-    }, [query, selectedIndex]);
+    }, [query, selectedIndex, questionOps[0]]);
     useEffect(() => {
         const knnResult =
             raw.map((res): KnnResult => ({
@@ -137,11 +137,13 @@ export function SimpleQuery({mainQueryOps, questions}: AppChildProps & HasQuesti
     }, [vector, raw]);
 
     return <div>
-
-        <MultiSelect selectedState={selectedIndicesOps} options={config.indices}/>
-        <InputBar ops={mainQueryOps}/>
         <TwoColumnAndRestLayout>
-            <QuestionsDisplay questionOps={mainQueryOps} questions={questions} queryVector={vector} indexOrIndices={indexOrIndices}/>
+            <MultiSelect selectedState={selectedIndicesOps} options={config.indices}/>
+            <QuestionBar questions={questions} questionOps={questionOps}/>
+        </TwoColumnAndRestLayout>
+        <InputBar ops={mainQueryOps} options={questionOptions(questions, questionOps[0])}/>
+        <TwoColumnAndRestLayout>
+            <QuestionsDisplay mainQueryOps={mainQueryOps} questionOps={questionOps} questions={questions} indexOrIndices={indexOrIndices}/>
             <SimpleQueryResultDisplay results={knnResult}/>
         </TwoColumnAndRestLayout>
         <ShowJson json={knnResult}/>

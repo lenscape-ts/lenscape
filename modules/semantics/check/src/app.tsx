@@ -5,19 +5,21 @@ import {KnnSearch} from './display/knn.search';
 import {Compare} from './display/compare';
 import {SimpleQuery} from "./display/simple.query";
 import {SelectButton} from "./display/selectButton";
-import {HasQuestions} from "./appProps";
+import {HasQuestions} from "./display/questions";
+import {AppChildProps} from "./appProps";
 
 
 export const SemanticSearchApp: React.FC<HasQuestions> = ({questions}) => {
     const selectedOps = useState('knn');
-    const mainQueryOps = useState(questions[0])
+    const mainQueryOps = useState<string>(Object.values(questions)[0][0])
     const [selected] = selectedOps;
+    const questionOps = useState('all')
 
-
+    const childProps: AppChildProps = {questionOps, questions, mainQueryOps}
     const views: Record<string, React.ReactNode> = {
-        knn: <KnnSearch mainQueryOps={mainQueryOps} questions={questions}/>,
-        compare: <Compare mainQueryOps={mainQueryOps} questions={questions}/>,
-        query: <SimpleQuery mainQueryOps={mainQueryOps} questions={questions}/>,
+        knn: <KnnSearch {...childProps} />,
+        compare: <Compare {...childProps}/>,
+        query: <SimpleQuery {...childProps} />,
     };
 
     return (

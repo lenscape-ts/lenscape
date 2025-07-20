@@ -2,6 +2,8 @@ import React from "react";
 import {createRoot} from "react-dom/client";
 import {SemanticSearchApp} from "./app";
 import {ElasticSearchProvider} from "./elasticSearchConfig";
+import {NameAnd} from "@lenscape/records";
+import {Questions} from "./display/questions";
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 // const model_id = 'intfloat__multilingual-e5-large'
@@ -21,21 +23,39 @@ const elasticSearchConfig = {
     ]
 }
 
-const questionList: string[] = [
-    'Sometimes my PC freezes',
-    'Sometimes my PC freezes, what should I do?',
-    'timesheets',
-    'time-tracking',
-    'how to fill in my timesheets',
-    'fill in my timesheets',
-    'I have forgotten my password',
-    'I have forgotten my password, how can I reset it?',
-    'sprint 13',
-    'what are my jira tickets',
-    'devops training',
+const questionList: Questions = {
+    'pc freezes': [
+        'Sometimes my PC freezes',
+        'Sometimes my PC freezes, what should I do?',
 
-]
-
+    ],
+    'reset password': [
+        'I have forgotten my password',
+        'I have forgotten my password, how can I reset it?',
+        'how do I reset my password',
+        'how to reset my password',
+        'reset my password',
+    ],
+    'timesheets': [
+        'timesheets',
+        'time-tracking',
+        'how do I fill in my timesheets',
+        'how to fill in my timesheets',
+        'fill in my timesheets',
+    ],
+    'jira': [
+        'sprint 13',
+        'what are my jira tickets',
+    ],
+    'mygenius': [
+        'devops training',
+        'how do I enroll for scrum master training',
+        'how do I get better at project management',
+        'Are there any courses on project management?',
+        'Are there any courses on public speaking?',
+    ]
+}
+export type Question = NameAnd<string[]>;
 root.render(<React.StrictMode>
     <ElasticSearchProvider elasticSearchConfig={elasticSearchConfig}>
         <SemanticSearchApp questions={questionList}/>

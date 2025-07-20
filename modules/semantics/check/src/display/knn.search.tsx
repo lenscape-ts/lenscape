@@ -3,10 +3,11 @@ import {knnSubmit, massVectorise, QueryAndSimilarity, vectorise} from "../helper
 import {cosineSimilarity} from "../helpers/cosineSimilarity";
 import {TwoColumnAndRestLayout} from "./two.column.and.rest.layout";
 import {InputBar} from "./inputBar";
-import {AppChildProps, HasQuestions} from "../appProps";
+import {AppChildProps} from "../appProps";
 import {useElasticSearchContext} from "../elasticSearchConfig";
 import {SimilarityAndIdProps, SimiliarityAndIdList} from "./similiarityAndIdList";
 import {ShowJson, ShowText} from "./show,json";
+import {QuestionBar, questionOptions} from "./questions";
 
 export type KnnResult = {
     id: string
@@ -51,7 +52,7 @@ export function KnnSelectedResult({result, queryVec}: KnnSelectedResultProps) {
 }
 
 
-export function KnnSearch({mainQueryOps, questions}: AppChildProps & HasQuestions) {
+export function KnnSearch({mainQueryOps, questions, questionOps}: AppChildProps) {
     const [res, setRes] = useState<any>(null);
     const [qv, setQv] = useState<number[]>([]);
     const [sims, setSims] = useState<any>([])
@@ -76,7 +77,8 @@ export function KnnSearch({mainQueryOps, questions}: AppChildProps & HasQuestion
     return (
         <div style={{padding: '1rem', fontFamily: 'sans-serif', width: 1800, margin: 'auto'}}>
             <h2>Semantic Search</h2>
-            <InputBar ops={mainQueryOps} onEnter={onEnter} options={questions}/>
+            <QuestionBar questions={questions} questionOps={questionOps}/>
+            <InputBar ops={mainQueryOps} onEnter={onEnter} options={questionOptions(questions, questionOps[0])}/>
 
             <KnnResults results={sims} selected={selectedOps} queryVec={qv}/>
             <ShowJson json={sims}/>
