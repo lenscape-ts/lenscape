@@ -58,8 +58,13 @@ export function KnnSearch({mainQueryOps, questions, questionOps}: AppChildProps)
     const [sims, setSims] = useState<any>([])
     const elasticSearchConfig = useElasticSearchContext()
     const selectedOps = useState(0)
+    const [latency, setLatency] = useState(0);
     const onEnter = (query: string) => {
-        knnSubmit(elasticSearchConfig, elasticSearchConfig.centroidIndex, query).then(x => setRes(x));
+        const start = new Date().getTime()
+        knnSubmit(elasticSearchConfig, elasticSearchConfig.centroidIndex, query).then(x => {
+            setLatency(new Date().getTime() - start);
+            setRes(x);
+        });
         vectorise(elasticSearchConfig, query).then(x => setQv(x));
     };
     useEffect(() => {
@@ -80,6 +85,7 @@ export function KnnSearch({mainQueryOps, questions, questionOps}: AppChildProps)
             <QuestionBar questions={questions} questionOps={questionOps}/>
             <InputBar ops={mainQueryOps} onEnter={onEnter} options={questionOptions(questions, questionOps[0])}/>
 
+            <span>Latency {latency}</span>
             <KnnResults results={sims} selected={selectedOps} queryVec={qv}/>
             <ShowJson json={sims}/>
             <ShowText text={qv.toString()}/>

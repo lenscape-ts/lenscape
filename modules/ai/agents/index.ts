@@ -7,6 +7,7 @@ export * from './src/messages'
 export * from './src/pipelines/add.prefix.pipeline.details'
 export * from './src/queryAgentContext'
 export * from "./src/selectors/chain.selector";
+export * from './src/selectors/keyword.selector'
 export * from "./src/selectors/fixed.selector";
 export * from "./src/selectors/selectorFn";
 

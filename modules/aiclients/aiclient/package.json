@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/aiclient",
   "description": "AI Client",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index",
   "types": "dist/index",
   "browser": {
@@ -21,11 +21,11 @@
   },
   "dependencies": {
     "axios": "1.7.2",
-    "@lenscape/arrays": "0.1.1",
-    "@lenscape/auth": "0.1.1",
-    "@lenscape/errors": "0.1.1",
-    "@lenscape/records": "0.1.1",
-    "@lenscape/time": "0.1.1",
+    "@lenscape/arrays": "0.1.2",
+    "@lenscape/auth": "0.1.2",
+    "@lenscape/errors": "0.1.2",
+    "@lenscape/records": "0.1.2",
+    "@lenscape/time": "0.1.2",
     "debug": "^4.3.4"
   },
   "devDependencies": {

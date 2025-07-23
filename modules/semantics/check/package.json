@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/semantics_check",
   "description": "type a query see the effectiveness",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "browser": {
     "child_process": false
   },
@@ -18,24 +18,28 @@
     ]
   },
   "dependencies": {
-    "axios": "1.7.2",
-    "debug": "^4.3.4",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@focuson/lens": "1.44.3",
     "@focuson/state": "1.44.3",
     "@laoban/utils": "1.4.45",
-    "@mui/material": "^5.15.10",
+    "@lenscape/agents": "0.1.2",
+    "@lenscape/llmselector": "0.1.2",
+    "@lenscape/rag_agents": "0.1.2",
     "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
+    "axios": "1.7.2",
+    "debug": "^4.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "parcel": "^2.11.0",
+    "parcel-reporter-static-files-copy": "^1.5.3",
     "typescript": "^5.3.3"
   },
   "eslintConfig": {
@@ -68,6 +72,7 @@
   "peerDependencies": {},
   "repository": "git@github.com:intellimaintain/intellimaintain.git",
   "scripts": {
+    "prepare-tiktoken": "copy ..\\..\\..\\node_modules\\tiktoken\\tiktoken_bg.wasm public\\",
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",
     "test": "jest --config jest.config.json",

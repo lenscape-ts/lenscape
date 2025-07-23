@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/safe",
   "description": "things like safeArray and safeObject that ensure we don't throw errors when accessing properties",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index",
   "types": "dist/index",
   "browserslist": {
@@ -17,8 +17,8 @@
     ]
   },
   "dependencies": {
-    "@lenscape/errors": "0.1.1",
-    "@lenscape/records": "0.1.1",
+    "@lenscape/errors": "0.1.2",
+    "@lenscape/records": "0.1.2",
     "debug": "^4.3.4"
   },
   "devDependencies": {

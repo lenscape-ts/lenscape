@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/semantics_display",
   "description": "k means clustering then semantic averaging of embeddings",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "browser": {
     "child_process": false
   },
@@ -20,7 +20,7 @@
   "dependencies": {
     "chart.js": "^4.5.0",
     "react-chartjs-2": "^5.3.0",
-    "@lenscape/semantics_kmeans": "0.1.1",
+    "@lenscape/semantics_kmeans": "0.1.2",
     "debug": "^4.3.4",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",

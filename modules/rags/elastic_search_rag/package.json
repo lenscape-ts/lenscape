@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/elastic_search_rag",
   "description": "How we do RAG with Elastic Search",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index",
   "types": "dist/index",
   "browserslist": {
@@ -18,15 +18,15 @@
   },
   "dependencies": {
     "axios": "1.7.2",
-    "@lenscape/agents": "0.1.1",
-    "@lenscape/aiclient": "0.1.1",
-    "@lenscape/arrays": "0.1.1",
-    "@lenscape/errors": "0.1.1",
-    "@lenscape/events": "0.1.1",
-    "@lenscape/lens": "0.1.1",
-    "@lenscape/string_utils": "0.1.1",
-    "@lenscape/rag_agents": "0.1.1",
-    "@lenscape/records": "0.1.1",
+    "@lenscape/agents": "0.1.2",
+    "@lenscape/aiclient": "0.1.2",
+    "@lenscape/arrays": "0.1.2",
+    "@lenscape/errors": "0.1.2",
+    "@lenscape/events": "0.1.2",
+    "@lenscape/lens": "0.1.2",
+    "@lenscape/string_utils": "0.1.2",
+    "@lenscape/rag_agents": "0.1.2",
+    "@lenscape/records": "0.1.2",
     "debug": "^4.3.4"
   },
   "devDependencies": {

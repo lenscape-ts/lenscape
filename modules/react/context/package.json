@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/context",
   "description": "Context utilities for the @lenscape project",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "browserslist": {
     "development": [
       "last 1 chrome version",
@@ -15,15 +15,15 @@
     ]
   },
   "dependencies": {
-    "@lenscape/lens": "0.1.1",
-    "@lenscape/string_utils": "0.1.1",
+    "@lenscape/lens": "0.1.2",
+    "@lenscape/string_utils": "0.1.2",
     "debug": "^4.3.4",
     "@focuson/lens": "1.44.3",
     "@focuson/state": "1.44.3",
     "@laoban/utils": "1.4.45"
   },
   "devDependencies": {
-    "@lenscape/test_utils": "0.1.1",
+    "@lenscape/test_utils": "0.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "@babel/core": "^7.26.0",

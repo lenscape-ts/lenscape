@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/react_event_storage_demo",
   "description": "A demo of the react event storage",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "browserslist": {
     "development": [
       "last 1 chrome version",
@@ -16,9 +16,9 @@
   },
   "dependencies": {
     "axios": "1.7.2",
-    "@lenscape/async_file_storage": "0.1.1",
-    "@lenscape/errors": "0.1.1",
-    "@lenscape/react_event_storage": "0.1.1",
+    "@lenscape/async_file_storage": "0.1.2",
+    "@lenscape/errors": "0.1.2",
+    "@lenscape/react_event_storage": "0.1.2",
     "debug": "^4.3.4",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",

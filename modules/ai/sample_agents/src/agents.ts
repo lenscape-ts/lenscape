@@ -104,7 +104,7 @@ export const agentCards: AgentCards<Context, Pipelines, Selector> = {
             {
                 role: 'system',
                 content: `
-You are to decide which agent to use based on the conversation. Your result will be a single word which is the name of the agent to use. If you are not sure, say "\${context.selection} which is the current selection".
+You are to decide which agent to use based on the conversation. Your result will be a single word which is the name of the agent to use. If you are not sure, say "\${context.lastSelection} which is the current selection".
 The next message is a list of the agents available to you, and their purpose. You will also be given the conversation so far, which is a list of messages.
 
 Please be careful when giving your answer, as it will be used to select the agent to use. The only legal names are \${agentNames}

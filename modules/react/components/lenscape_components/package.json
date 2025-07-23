@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/lenscape_components",
   "description": "The interfaces and some simple implementations (that can be overriden) of the components needed by lenscape",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "browserslist": {
     "development": [
       "last 1 chrome version",
@@ -15,10 +15,10 @@
     ]
   },
   "dependencies": {
-    "@lenscape/async": "0.1.1",
-    "@lenscape/context": "0.1.1",
-    "@lenscape/errors": "0.1.1",
-    "@lenscape/string_utils": "0.1.1",
+    "@lenscape/async": "0.1.2",
+    "@lenscape/context": "0.1.2",
+    "@lenscape/errors": "0.1.2",
+    "@lenscape/string_utils": "0.1.2",
     "debug": "^4.3.4",
     "@focuson/lens": "1.44.3",
     "@focuson/state": "1.44.3",

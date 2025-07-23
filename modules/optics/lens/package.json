@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/lens",
   "description": "A simple implementation of optics and turning them into/from paths",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index",
   "types": "dist/index",
   "browserslist": {
@@ -20,7 +20,7 @@
     "debug": "^4.3.4"
   },
   "devDependencies": {
-    "@lenscape/async": "0.1.1",
+    "@lenscape/async": "0.1.2",
     "typescript": "^5.2.2",
     "@testing-library/jest-dom": "^6.1.4",
     "@types/jest": "^29.0.0",

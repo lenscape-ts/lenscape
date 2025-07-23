@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/string_utils",
   "description": "String utilties for the @lenscape project",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index",
   "types": "dist/index",
   "browserslist": {

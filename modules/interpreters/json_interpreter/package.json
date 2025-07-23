@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/json_interpreter",
   "description": "The 'classic' interpreter that turns events into state",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index",
   "types": "dist/index",
   "browserslist": {
@@ -17,10 +17,10 @@
     ]
   },
   "dependencies": {
-    "@lenscape/events": "0.1.1",
-    "@lenscape/interpreter": "0.1.1",
-    "@lenscape/lens": "0.1.1",
-    "@lenscape/string_utils": "0.1.1",
+    "@lenscape/events": "0.1.2",
+    "@lenscape/interpreter": "0.1.2",
+    "@lenscape/lens": "0.1.2",
+    "@lenscape/string_utils": "0.1.2",
     "debug": "^4.3.4"
   },
   "devDependencies": {

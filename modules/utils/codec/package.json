@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/codec",
   "description": "Coders and decoders for the @lenscape project",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index",
   "types": "dist/index",
   "browserslist": {
@@ -17,8 +17,8 @@
     ]
   },
   "dependencies": {
-    "@lenscape/errors": "0.1.1",
-    "@lenscape/validate": "0.1.1",
+    "@lenscape/errors": "0.1.2",
+    "@lenscape/validate": "0.1.2",
     "debug": "^4.3.4"
   },
   "devDependencies": {

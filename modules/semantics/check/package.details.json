@@ -6,12 +6,19 @@
     "dependencies": {
       "axios": "${properties.axios}"
     },
-    "devDependencies": {},
+    "devDependencies": {
+    },
     "browser": {
       "child_process": false
+    },
+    "scripts": {
+      "prepare-tiktoken": "copy ..\\..\\..\\node_modules\\tiktoken\\tiktoken_bg.wasm public\\"
     }
   },
   "links": [
+    "@lenscape/rag_agents",
+    "@lenscape/llmselector",
+    "@lenscape/agents"
   ],
   "guards": {
     "compile": true,

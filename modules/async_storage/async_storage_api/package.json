@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/async_storage_api",
   "description": "a filesystem implementation for async storage",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index",
   "types": "dist/index",
   "browserslist": {
@@ -18,10 +18,10 @@
   },
   "dependencies": {
     "express": "^5.1.0",
-    "@lenscape/async_storage": "0.1.1",
-    "@lenscape/codec": "0.1.1",
-    "@lenscape/errors": "0.1.1",
-    "@lenscape/string_utils": "0.1.1",
+    "@lenscape/async_storage": "0.1.2",
+    "@lenscape/codec": "0.1.2",
+    "@lenscape/errors": "0.1.2",
+    "@lenscape/string_utils": "0.1.2",
     "debug": "^4.3.4"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 {
   "name": "@lenscape/semantics_kmeans",
   "description": "k means clustering then semantic averaging of embeddings",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index",
   "types": "dist/index",
   "browser": {
@@ -23,9 +23,9 @@
     "ml-kmeans": "^6.0.0",
     "ml-matrix": "^6.12.1",
     "tsne-js": "^1.0.3",
-    "@lenscape/aiclient": "0.1.1",
-    "@lenscape/agents": "0.1.1",
-    "@lenscape/errors": "0.1.1",
+    "@lenscape/aiclient": "0.1.2",
+    "@lenscape/agents": "0.1.2",
+    "@lenscape/errors": "0.1.2",
     "debug": "^4.3.4"
   },
   "devDependencies": {

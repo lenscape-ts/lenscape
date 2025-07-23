@@ -28,6 +28,7 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "repository": "git@github.com:intellimaintain/intellimaintain.git",
+
     "tiktoken": "1.0.21",
     "xml2js": "^0.6.2",
     "@types/express": "^5.0.2"

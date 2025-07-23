@@ -48,7 +48,7 @@ export async function knnSubmit({elasticSearchUrl, model_id}: ElasticSearchConfi
         return {
             id: hit._id,
             score: hit._score,
-            index: hit._source.originalIndex,
+            index: hit._source.originalIndex || hit._index,
             full_text_embeddings: hit._source.full_text_embeddings,
             keyfield: hit._source.keyfield || '',
             keyfields: hit._source.keyfields || []

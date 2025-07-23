@@ -21,16 +21,18 @@ export function SimpleQueryResultDisplay({results}: SimpleQueryResultDisplayProp
     return <table>
         <thead>
         <tr>
-            <td>Id</td>
             <td>Similarity</td>
+            <td>Index</td>
+            {/*<td>Id</td>*/}
             <td>Keyfield</td>
         </tr>
         </thead>
         <tbody>
         {results.map((result, index) => (
             <tr key={index}>
-                <td>{result.id}</td>
                 <td>{result.similarity.toFixed(4)}</td>
+                <td style={{ whiteSpace: 'nowrap' }}>{result.index}</td>
+                {/*<td>{result.id}</td>*/}
                 <td>{result.keyfield}</td>
             </tr>
         ))}
@@ -51,6 +53,7 @@ export function QuestionsDisplay({questions, mainQueryOps, questionOps, indexOrI
     const [nameToKeyfield, setNameToKeyfield] = useState<QuestionToKeyfield>({});
     const esConfig = useElasticSearchContext()
     const activeQuestions = useMemo(() => questionOptions(questions, questionOps[0]), [questions, questionOps[0]])
+
     useEffect(() => {
         setNameToNumber({})
 
@@ -79,7 +82,7 @@ export function QuestionsDisplay({questions, mainQueryOps, questionOps, indexOrI
             <tr style={{backgroundColor: "#f2f2f2", textAlign: "left"}}>
                 <th style={{padding: "8px", borderBottom: "2px solid #ccc"}}>Question</th>
                 <th style={{padding: "8px", borderBottom: "2px solid #ccc"}}>Similarity</th>
-                <th style={{padding: "8px", borderBottom: "2px solid #ccc"}}>Keyfield</th>
+                <th style={{padding: "8px", borderBottom: "2px solid #ccc"}}>Close question</th>
             </tr>
             </thead>
             <tbody>
@@ -120,8 +123,14 @@ export function SimpleQuery({mainQueryOps, questions, questionOps}: AppChildProp
     const selectedIndicesOps = useState(config.indices);
     const selectedIndex = selectedIndicesOps[0];
     const indexOrIndices = useMemo(() => selectedIndex.join(','), [config, selectedIndex]);
+    const [latency, setLatency] = useState(0)
     useEffect(() => {
-        knnSubmit(config, indexOrIndices, query, {size: 20}).then(res => setRaw(res))
+        const start = new Date().getTime()
+        setKnnResult( [])
+        knnSubmit(config, indexOrIndices, query, {size: 30}).then(res => {
+            setRaw(res);
+            setLatency(new Date().getTime()-start)
+        })
         vectorise(config, query).then(v => setVector(v))
 
     }, [query, selectedIndex, questionOps[0]]);
@@ -130,7 +139,7 @@ export function SimpleQuery({mainQueryOps, questions, questionOps}: AppChildProp
             raw.map((res): KnnResult => ({
                 ...res,
                 similarity: cosineSimilarity(res.full_text_embeddings, vector),
-            }));
+            })).sort((a, b) => b.similarity - a.similarity);
         console.log('calculating knn result', vector, raw, knnResult);
         setKnnResult(knnResult);
 
@@ -144,7 +153,10 @@ export function SimpleQuery({mainQueryOps, questions, questionOps}: AppChildProp
         <InputBar ops={mainQueryOps} options={questionOptions(questions, questionOps[0])}/>
         <TwoColumnAndRestLayout>
             <QuestionsDisplay mainQueryOps={mainQueryOps} questionOps={questionOps} questions={questions} indexOrIndices={indexOrIndices}/>
-            <SimpleQueryResultDisplay results={knnResult}/>
+            <div>
+                <div>Latency: {latency}</div>
+                <SimpleQueryResultDisplay results={knnResult}/>
+            </div>
         </TwoColumnAndRestLayout>
         <ShowJson json={knnResult}/>
     </div>
