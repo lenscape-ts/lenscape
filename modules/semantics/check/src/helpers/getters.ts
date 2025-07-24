@@ -1,5 +1,5 @@
 import axios from "axios";
-import {token} from "../secrets";
+import {elasticSearchToken} from "../secrets";
 import {chunkAndMapArrays} from "@lenscape/arrays";
 import {ElasticSearchConfig} from "../elasticSearchConfig";
 
@@ -40,7 +40,7 @@ export async function knnSubmit({elasticSearchUrl, model_id}: ElasticSearchConfi
         {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: token
+                Authorization: elasticSearchToken
             }
         }
     );
@@ -60,7 +60,7 @@ export async function vectorise({elasticSearchUrl, model_id}: ElasticSearchConfi
     const {data} = await axios.post(
         `${elasticSearchUrl}/_ml/trained_models/${model_id}/_infer`,
         {docs: [{text_field: query}]},
-        {headers: {Authorization: token}}
+        {headers: {Authorization: elasticSearchToken}}
     );
     const queryVector = data.inference_results[0].predicted_value;
     return queryVector
@@ -81,7 +81,7 @@ export const massVectorise = ({elasticSearchUrl, model_id}: ElasticSearchConfig)
     const {data} = await axios.post(
         `${elasticSearchUrl}/_ml/trained_models/${model_id}/_infer`,
         {docs: queries.map(text => ({text_field: text}))},
-        {headers: {Authorization: token}}
+        {headers: {Authorization: elasticSearchToken}}
     );
 
     return data.inference_results.map((r: any, i: number) => ({query: queries[i], value: r.predicted_value}));
