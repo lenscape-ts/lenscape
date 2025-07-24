@@ -24,6 +24,7 @@
     "@focuson/state": "1.44.3",
     "@laoban/utils": "1.4.45",
     "@lenscape/agents": "0.1.2",
+    "@lenscape/azureai": "0.1.2",
     "@lenscape/llmselector": "0.1.2",
     "@lenscape/rag_agents": "0.1.2",
     "@mui/icons-material": "^5.15.10",

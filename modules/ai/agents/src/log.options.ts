@@ -12,6 +12,11 @@ export type NormalisedLogOptions = Required<LogOptions>
 export type LogOptionOrString = LogOptions | string
 export type LogOptionInResult = LogOptionOrString | LogOptionOrString[]
 export type LogAnd<T> = T & { log?: LogOptionInResult }
+
+export function paramsFrom<T>(x: LogAnd<T>) {
+    return (x.log as any).params
+}
+
 export type NameAndLogAnd<T> = T & { logs: NameAnd<NormalisedLogOptions[]> }
 
 export function normaliseLogOptions(l?: LogOptionInResult): NormalisedLogOptions[] {

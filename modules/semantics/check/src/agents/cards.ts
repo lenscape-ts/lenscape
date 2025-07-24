@@ -10,7 +10,7 @@ export type Pipelines = LlmPipelineDetails | RagPipelineDetails | RagIndexLlm<an
 export type Selector = FixedSelector | ChainSelector<Context, any> | LlmSelector | KeywordSelector
 
 export const apps: AgentCard<Context, Pipelines> = {
-    purpose: 'This agent answers questions about apps that have been installed on the system. These are general apps, timesheet management, general office work and productivity apps.',
+    purpose: 'This agent answers questions about apps that have been installed on the system. These are general apps, room booking apps, timesheet management, general office work and productivity apps.',
     samples: [
         'How can I fill in my timesheet?',
         'How can I book a meeting room?',
@@ -71,7 +71,7 @@ A RAG search has been performed on the question and the top 3 results are provid
     }
 }
 export const itsm: AgentCard<Context, Pipelines> = {
-    purpose: 'This agent answers Itsm questions.',
+    purpose: 'This agent answers Itsm questions, including questions about office 365',
     samples: [
         'How do I raise a ticket for a new laptop?',
         'What is the process for reporting a security incident?',
@@ -174,15 +174,14 @@ export const agentCards: AgentCards<Context, Pipelines, Selector> = {
             {
                 role: 'system',
                 content: `
-You are to decide which agent to use based on the conversation. Your result will be a single word which is the name of the agent to use. If you are not sure, say "\${context.lastSelected} which is the current selection".
+You are to decide which agent to use based on the conversation. Your result will be a single word which is the name of the agent to use. If you are not sure, say "\${context.lastSelected}" which is the current selection.
 The next message is a list of the agents available to you, and their purpose. You will also be given the conversation so far, which is a list of messages.
 
 Please be careful when giving your answer, as it will be used to select the agent to use. The only legal names are \${agentNames}
 
-The c
 `
             },
-            {role: 'system', content: '${agentCards}'}
+            {role: 'system', content: '${agentSummary}'}
         ]
     }
 }

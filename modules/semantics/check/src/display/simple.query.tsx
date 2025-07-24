@@ -11,6 +11,7 @@ import {NameAnd} from "@lenscape/records";
 import {ellipsesInMiddle} from "@lenscape/string_utils";
 import {MultiSelect} from "./multiselect";
 import {HasQuestionOps, HasQuestions, QuestionBar, questionOptions} from "./questions";
+import {ClipHeight} from "./clip.height";
 
 
 export type SimpleQueryResultDisplayProps = {
@@ -31,7 +32,7 @@ export function SimpleQueryResultDisplay({results}: SimpleQueryResultDisplayProp
         {results.map((result, index) => (
             <tr key={index}>
                 <td>{result.similarity.toFixed(4)}</td>
-                <td style={{ whiteSpace: 'nowrap' }}>{result.index}</td>
+                <td style={{whiteSpace: 'nowrap'}}>{result.index}</td>
                 {/*<td>{result.id}</td>*/}
                 <td>{result.keyfield}</td>
             </tr>
@@ -61,13 +62,17 @@ export function QuestionsDisplay({questions, mainQueryOps, questionOps, indexOrI
             for (const question of activeQuestions) {
                 const queryVector = await vectorise(esConfig, question)
                 const res = await knnSubmit(esConfig, indexOrIndices, question)
+                const resAndSimilarity = res.map(r =>
+                    ({...r, similarity: cosineSimilarity(queryVector, r.full_text_embeddings)}))
+                    .sort((a, b) => b.similarity - a.similarity);
+
                 setNameToNumber(old => ({
                     ...old,
-                    [question]: cosineSimilarity(queryVector, res[0].full_text_embeddings)
+                    [question]: resAndSimilarity[0].similarity
                 }))
                 setNameToKeyfield(old => ({
                     ...old,
-                    [question]: res[0].keyfield || ''
+                    [question]: resAndSimilarity[0].keyfield || ''
                 }))
             }
 
@@ -126,10 +131,10 @@ export function SimpleQuery({mainQueryOps, questions, questionOps}: AppChildProp
     const [latency, setLatency] = useState(0)
     useEffect(() => {
         const start = new Date().getTime()
-        setKnnResult( [])
+        setKnnResult([])
         knnSubmit(config, indexOrIndices, query, {size: 30}).then(res => {
             setRaw(res);
-            setLatency(new Date().getTime()-start)
+            setLatency(new Date().getTime() - start)
         })
         vectorise(config, query).then(v => setVector(v))
 
@@ -152,7 +157,9 @@ export function SimpleQuery({mainQueryOps, questions, questionOps}: AppChildProp
         </TwoColumnAndRestLayout>
         <InputBar ops={mainQueryOps} options={questionOptions(questions, questionOps[0])}/>
         <TwoColumnAndRestLayout>
-            <QuestionsDisplay mainQueryOps={mainQueryOps} questionOps={questionOps} questions={questions} indexOrIndices={indexOrIndices}/>
+            <ClipHeight maxHeight='100vh' scrollable={true}>
+                <QuestionsDisplay mainQueryOps={mainQueryOps} questionOps={questionOps} questions={questions} indexOrIndices={indexOrIndices}/>
+            </ClipHeight>
             <div>
                 <div>Latency: {latency}</div>
                 <SimpleQueryResultDisplay results={knnResult}/>

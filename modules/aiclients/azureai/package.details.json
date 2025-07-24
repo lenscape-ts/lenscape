@@ -1,0 +1,25 @@
+{
+  "template": "typescript",
+  "name": "@lenscape/azureai",
+  "description": "Client for azureai",
+  "packageJson": {
+    "dependencies": {
+      "axios": "${properties.axios}",
+      "tiktoken": "${properties.tiktoken}"
+    },
+    "devDependencies": {
+      "axios-mock-adapter": "${properties.axios-mock-adapter}"
+    },
+    "browser": {
+      "child_process": false
+    }
+  },
+  "links": [
+    "@lenscape/aiclient"
+  ],
+  "guards": {
+    "compile": true,
+    "publish": true,
+    "test": true
+  }
+}

@@ -11,14 +11,19 @@ export type LlmSelector = {
     description?: string
 }
 
+
 export const llmSelector = <Context, Pipeline>(aiClients: AiClients, cards: NameAnd<AgentCard<Context, Pipeline>>, lookup: LookupMessages,
                                                deref: DereferenceMessages<any> = defaultDereferenceMessages): SelectorFn<Context, LlmSelector> => ({
     //note no isDefinedAt which defaults to true
     execute: async (selector, context: Context, messages: BaseMessage[]): Promise<LogAnd<ErrorsOr<string>>> => {
         const mainAgentEntries = Object.entries(cards).filter(([name, card]) => card.main !== false);
-        const agentCards = mainAgentEntries.map(([name, card]) => `${name}: ${card.purpose}`).join('\n');
+        const agentPurposes = mainAgentEntries.map(([name, card]) => `${name}: ${card.purpose}`).join('\n');
         const agentNames = mainAgentEntries.map(([name, card]) => name).sort();
-        const promptMessages = deref({context, agentNames: agentNames.join(', '), agentCards}, lookup(selector.prefix));
+        const agentSummary = mainAgentEntries.map(([name, card]) =>
+            `* ${name}: 
+${card.purpose}. Sample questions: ${card.samples.map(q => `" - ${q}"`).join('\n')}`
+        ).join('\n');
+        const promptMessages = deref({context, agentNames: agentNames.join(', '), agentPurposes, agentSummary}, lookup(selector.prefix));
         if (isErrors(promptMessages)) return {...promptMessages, log: {whatHappened: 'find.agent.dereference.prefix', severity: 'error'}};
 
         const aiClient = aiClients[selector.model];
@@ -31,7 +36,7 @@ export const llmSelector = <Context, Pipeline>(aiClients: AiClients, cards: Name
         const lastContent = lastMessage.content.trim();
         return {
             value: lastContent,
-            log: {whatHappened: 'llm.selector.agent.selected', params: lastContent}
+            log: {whatHappened: 'llm.selector.agent.selected', params: JSON.stringify(promptMessages, null, 2)}
         }
     }
 })

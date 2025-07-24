@@ -6,10 +6,12 @@ import {Questions} from "./display/questions";
 import {defaultOpenAiConfig, openAiClient} from "@lenscape/openai";
 import axios from "axios";
 import {AgentCardsProvider, SelectorFnProvider} from "./aiconfig";
-import {openAiToken} from "./secrets";
+import {azureAiToken, azureAiUrl, openAiToken} from "./secrets";
 import {llmSelector} from "@lenscape/llmselector";
 import {agentCards, Context, Pipelines} from "./agents/cards";
 import {defaultLookupMessages} from "@lenscape/agents";
+import {questions} from "./questions";
+import {azureOpenAiClient, defaultAzureAiConfig} from "@lenscape/azureai";
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 // const model_id = 'intfloat__multilingual-e5-large'
@@ -73,15 +75,13 @@ const questionList: Questions = {
         "I need to book  a seat in munich arnulstrasse app",
         "I need to book  a room in munich arnulstrasse",
         "I need to book  an office in munich arnulstrasse"
-    ]
+    ],
+    ...questions
 }
-
 const aiClients = {
-    openai: openAiClient({
-        ...defaultOpenAiConfig(axios, {
-            OPENAI_TOKEN: openAiToken,
-            // model_id:'gpt-3.5-turbo-0125'
-            model_id: 'gpt-4o-mini'
+    openai: azureOpenAiClient({
+        ...defaultAzureAiConfig(axios,azureAiUrl,{
+            AZURE_OPENAI_TOKEN: azureAiToken,
         }), tiktokenEncoder: undefined
     })
 }

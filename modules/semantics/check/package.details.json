@@ -17,6 +17,7 @@
   },
   "links": [
     "@lenscape/rag_agents",
+    "@lenscape/azureai",
     "@lenscape/llmselector",
     "@lenscape/agents"
   ],
