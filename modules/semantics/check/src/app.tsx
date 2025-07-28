@@ -8,6 +8,7 @@ import {SelectButton} from "./display/selectButton";
 import {HasQuestions} from "./display/questions";
 import {AppChildProps} from "./appProps";
 import {WhichAgent} from "./agents/agents";
+import {MassVectorisation} from "./display/mass.vectorisation";
 
 
 export const SemanticSearchApp: React.FC<HasQuestions> = ({questions}) => {
@@ -18,9 +19,10 @@ export const SemanticSearchApp: React.FC<HasQuestions> = ({questions}) => {
 
     const childProps: AppChildProps = {questionOps, questions, mainQueryOps}
     const views: Record<string, React.ReactNode> = {
-        knn: <KnnSearch {...childProps} />,
+            knn: <KnnSearch {...childProps} />,
         compare: <Compare {...childProps}/>,
         query: <SimpleQuery {...childProps} />,
+        massVectorisation: <MassVectorisation {...childProps} />,
         agents: <WhichAgent {...childProps} />,
     };
 

@@ -87,6 +87,7 @@ export const massVectorise = ({elasticSearchUrl, model_id}: ElasticSearchConfig)
     return data.inference_results.map((r: any, i: number) => ({query: queries[i], value: r.predicted_value}));
 };
 
-export const chunkAndMassVectorise = (elasticSearchConfig: ElasticSearchConfig) => chunkAndMapArrays(500, massVectorise(elasticSearchConfig))
+export const chunkAndMassVectorise = (elasticSearchConfig: ElasticSearchConfig) =>
+    chunkAndMapArrays(500, massVectorise(elasticSearchConfig))
 
 
