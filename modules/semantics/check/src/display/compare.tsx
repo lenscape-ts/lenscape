@@ -10,35 +10,50 @@ import {QuestionBar, questionOptions} from "./questions";
 
 export function Compare({mainQueryOps, questions, questionOps}: AppChildProps) {
     const secondOps = useState(Object.values(questions)[0][1] || '')
+    const [translated,setTranslated] = useState( '')
     const [firstVector, setFirstVector] = useState<number[]>([])
     const [secondVector, setSecondVector] = useState<number[]>([])
+    const [translatedVector, setTranslatedVector] = useState<number[]>([])
     const [diff, setDiff] = useState('')
+    const [translatedDiff, setTranslatedDiff] = useState<string>('')
     const elasticSearchConfig = useElasticSearchContext()
 
-    function calcVectors() {
-        vectorise(elasticSearchConfig, mainQueryOps[0]).then(v => setFirstVector(v))
-        vectorise(elasticSearchConfig, secondOps[0]).then(v => setSecondVector(v))
-    }
-
-    useEffect(() => {
+    async function calcVectors() {
         try {
-            const result = cosineSimilarity(firstVector, secondVector);
-            setDiff(result.toString())
+            const [first, second] = await Promise.all([
+                vectorise(elasticSearchConfig, mainQueryOps[0]),
+                vectorise(elasticSearchConfig, secondOps[0]),
+            ]);
+            setFirstVector(first);
+            setSecondVector(second);
+
+            const result = cosineSimilarity(first, second);
+            setDiff(result.toString());
         } catch (e: any) {
             setDiff(`Error: ${e.message}`);
         }
-    }, [firstVector, secondVector])
+    }
+
+
+    useEffect(() =>{calcVectors()}, [mainQueryOps[0], secondOps[0]])
 
     return <div>
         <h1>First sentence</h1>
         <QuestionBar questions={questions} questionOps={questionOps}/>
-        <InputBar ops={mainQueryOps} onEnter={calcVectors} options={questionOptions(questions, questionOps[0])}/>
+        <InputBar ops={mainQueryOps} options={questionOptions(questions, questionOps[0])}/>
         <ShowText text={firstVector.toString()}/>
+
         <h1>Second sentence</h1>
-        <InputBar ops={secondOps} onEnter={calcVectors}/>
+        <InputBar ops={secondOps}/>
         <ShowText text={secondVector.toString()}/>
+
         <h1>Similarity</h1>
         <ShowText text={diff}/>
+
+        <h1>Translated</h1>
+        <ShowText text={translated}/>
+        <ShowText text={translatedVector.toString()}/>
+        <ShowText text={translatedDiff}/>
 
     </div>
 }

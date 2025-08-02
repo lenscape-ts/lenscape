@@ -15,15 +15,13 @@ export type AzureAiConfig = {
     tiktokenEncoder?: TikTokenEncoderFn;
 };
 
-export function defaultAzureAiConfig(axios: AxiosStatic, baseURL: string, env: Env): AzureAiConfig {
-    if (!env.AZURE_OPENAI_TOKEN) throw new Error("AZURE_OPENAI_TOKEN is not set in the environment variables");
-
+export function defaultAzureAiConfig(axios: AxiosStatic, baseURL: string, apikey: string): AzureAiConfig {
     return {
         baseURL,
         axios,
-        deploymentId: env.AZURE_OPENAI_DEPLOYMENT_ID || "gpt-4o-mini", // Default deployment ID
-        apiVersion: env.AZURE_OPENAI_API_VERSION || "2024-02-15-preview",
-        apiKey: env.AZURE_OPENAI_TOKEN,
+        deploymentId: "gpt-4o-mini", // Default deployment ID
+        apiVersion: "2024-02-15-preview",
+        apiKey: apikey,
         tiktokenEncoder: getTikTokenEncoder,
     };
 }

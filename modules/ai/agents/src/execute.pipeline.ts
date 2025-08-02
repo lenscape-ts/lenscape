@@ -19,6 +19,7 @@ export async function executePipeline<Context, Pipeline extends HasType>(
 ): Promise<ExecutePipelineResult<Context>> {
     let pipelineData = data
     const logs: NameAnd<NormalisedLogOptions[]> = {};
+    if (details === undefined || Object.keys(details).length === 0) return {errors: ['No pipeline details provided'], logs}
 
     for (const [name, detail] of Object.entries(details)) {
         const executor = executors[detail.type];

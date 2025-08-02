@@ -7,7 +7,7 @@ import {SimpleQuery} from "./display/simple.query";
 import {SelectButton} from "./display/selectButton";
 import {HasQuestions} from "./display/questions";
 import {AppChildProps} from "./appProps";
-import {WhichAgent} from "./agents/agents";
+import {WhichAgent} from "./agents/agent.select";
 import {MassVectorisation} from "./display/mass.vectorisation";
 
 

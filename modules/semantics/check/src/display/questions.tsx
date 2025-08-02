@@ -9,6 +9,11 @@ export type HasQuestions = {
     questions: Questions
 }
 export type Questions = NameAnd<string[]>
+export type QuestionsAndAnswers = NameAnd<QuestionAndAnswer[]>
+export type QuestionAndAnswer = {
+    q: string
+    a: string
+}
 
 export function questionOptions(questions: Questions, key: string): string[] {
     if (key === 'all') return Object.values(questions).flat();

@@ -9,14 +9,14 @@ import {Context} from "./src/domain";
 import {ragDrivenAgentCard} from "./src/agents2";
 
 
-const ai = aiClients(axios, process.env)
+const ai = aiClients(axios, process.env, ''); // Replace '' with your actual API key
 const lookups = defaultLookupMessages({});
 // const find = findAgent(ai, agentCards, lookups)
 const rags: RagFns = {
     es: elasticSearchRag(defaultElasticSearchRagConfig())
 }
 
-const executors: PipelineExecutors<Context> = {
+export const allExecutors: PipelineExecutors<Context> = {
     rag: executeRagPipelineDetails(rags),
     llm: executeLlmPipelineDetails(ai, lookups),
     'rag.index.llm': executeRagIndexLlm(ai, lookups)
@@ -43,7 +43,7 @@ console.log(messages)
 //for agents2
 const agent = ragDrivenAgentCard
 const data = {context, messages}
-executePipeline(executors, data, agent.pipeline)
+executePipeline(allExecutors, data, agent.pipeline)
     .then(result =>
         console.log('Pipeline result:', JSON.stringify(result, null, 2)))
 

@@ -1,4 +1,10 @@
 export const questions = {
+    "group mail box":[
+      "ich möchte ein gruppenpostfach einrichten",
+        "I would like to set up a group mailbox",
+        "我想设置一个群组邮箱",
+        "Jag skulle vilja skapa en gruppbrevlåda"
+    ],
     "Microphone/Audio Issues": [
         "mein mikrofon funktioniert nicht in teams",
         "mein mikrofon funktioniert in microsfort teams",

@@ -25,7 +25,7 @@ export const apps: AgentCard<Context, Pipelines> = {
         },
         llm: {
             type: 'llm',
-            agent: 'openai',
+            agent: 'azureai',
             prefix: [
                 {
                     role: 'system', content: `
@@ -58,7 +58,7 @@ export const generalCompany: AgentCard<Context, Pipelines> = {
         },
         llm: {
             type: 'llm',
-            agent: 'openai',
+            agent: 'azureai',
             prefix: [
                 {
                     role: 'system',
@@ -71,7 +71,7 @@ A RAG search has been performed on the question and the top 3 results are provid
     }
 }
 export const itsm: AgentCard<Context, Pipelines> = {
-    purpose: 'This agent answers Itsm questions, including questions about office 365',
+    purpose: 'This agent answers Itsm questions, including questions about office 365 and SAP',
     samples: [
         'How do I raise a ticket for a new laptop?',
         'What is the process for reporting a security incident?',
@@ -90,7 +90,7 @@ export const itsm: AgentCard<Context, Pipelines> = {
         },
         llm: {
             type: 'llm',
-            agent: 'openai',
+            agent: 'azureai',
             prefix: [
                 {
                     role: 'system',
@@ -121,7 +121,7 @@ export const myGenius: AgentCard<Context, Pipelines> = {
         },
         llm: {
             type: 'llm',
-            agent: 'openai',
+            agent: 'azureai',
             prefix: [
                 {
                     role: 'system',
@@ -152,7 +152,7 @@ export const jira: AgentCard<Context, Pipelines> = {
         },
         llm: {
             type: 'llm',
-            agent: 'openai',
+            agent: 'azureai',
             prefix: [
                 {
                     role: 'system',
@@ -169,7 +169,7 @@ export const agentCards: AgentCards<Context, Pipelines, Selector> = {
     cards: {apps, generalCompany, itsm, myGenius,jira},
     selector: {
         type: 'llm',
-        model: 'openai',
+        model: 'azureai',
         prefix: [
             {
                 role: 'system',

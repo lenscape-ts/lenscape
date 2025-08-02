@@ -19,7 +19,8 @@
     "@lenscape/rag_agents",
     "@lenscape/azureai",
     "@lenscape/llmselector",
-    "@lenscape/agents"
+    "@lenscape/agents",
+    "@lenscape/sample_agents"
   ],
   "guards": {
     "compile": true,

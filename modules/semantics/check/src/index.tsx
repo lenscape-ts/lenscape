@@ -3,15 +3,10 @@ import {createRoot} from "react-dom/client";
 import {SemanticSearchApp} from "./app";
 import {ElasticSearchProvider} from "./elasticSearchConfig";
 import {Questions} from "./display/questions";
-import {defaultOpenAiConfig, openAiClient} from "@lenscape/openai";
-import axios from "axios";
 import {AgentCardsProvider, SelectorFnProvider} from "./aiconfig";
-import {azureAiToken, azureAiUrl, openAiToken} from "./secrets";
-import {llmSelector} from "@lenscape/llmselector";
-import {agentCards, Context, Pipelines} from "./agents/cards";
-import {defaultLookupMessages} from "@lenscape/agents";
+import {agentCards} from "./agents/cards";
 import {questions} from "./questions";
-import {azureOpenAiClient, defaultAzureAiConfig} from "@lenscape/azureai";
+import {llmSel} from "./agents/agent.config";
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 // const model_id = 'intfloat__multilingual-e5-large'
@@ -78,16 +73,7 @@ const questionList: Questions = {
     ],
     ...questions
 }
-const aiClients = {
-    openai: azureOpenAiClient({
-        ...defaultAzureAiConfig(axios,azureAiUrl,{
-            AZURE_OPENAI_TOKEN: azureAiToken,
-        }), tiktokenEncoder: undefined
-    })
-}
-export const llmSel = llmSelector<Context, Pipelines>(aiClients,
-    agentCards.cards,
-    defaultLookupMessages({}))
+
 
 root.render(<React.StrictMode>
     <AgentCardsProvider agentCards={agentCards}>
