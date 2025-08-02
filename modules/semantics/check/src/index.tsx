@@ -3,10 +3,10 @@ import {createRoot} from "react-dom/client";
 import {SemanticSearchApp} from "./app";
 import {ElasticSearchProvider} from "./elasticSearchConfig";
 import {Questions} from "./display/questions";
-import {AgentCardsProvider, SelectorFnProvider} from "./aiconfig";
+import {AgentCardsProvider, AiClientProvider, SelectorFnProvider} from "./aiconfig";
 import {agentCards} from "./agents/cards";
 import {questions} from "./questions";
-import {llmSel} from "./agents/agent.config";
+import {ai, llmSel} from "./agents/agent.config";
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 // const model_id = 'intfloat__multilingual-e5-large'
@@ -76,13 +76,15 @@ const questionList: Questions = {
 
 
 root.render(<React.StrictMode>
-    <AgentCardsProvider agentCards={agentCards}>
-        <SelectorFnProvider selectorFn={llmSel}>
-            <ElasticSearchProvider elasticSearchConfig={elasticSearchConfig}>
-                <SemanticSearchApp questions={questionList}/>
-            </ElasticSearchProvider>
-        </SelectorFnProvider>
-    </AgentCardsProvider>
+    <AiClientProvider aiClient={ai['azureai']}>
+        <AgentCardsProvider agentCards={agentCards}>
+            <SelectorFnProvider selectorFn={llmSel}>
+                <ElasticSearchProvider elasticSearchConfig={elasticSearchConfig}>
+                    <SemanticSearchApp questions={questionList}/>
+                </ElasticSearchProvider>
+            </SelectorFnProvider>
+        </AgentCardsProvider>
+    </AiClientProvider>
 
 </React.StrictMode>)
 
