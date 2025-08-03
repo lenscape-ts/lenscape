@@ -7,7 +7,7 @@ import React, {useEffect, useMemo, useState} from "react";
 import {useAgentCards, useSelectorFn} from "../aiconfig";
 import {ErrorsOr, isValue, mapErrorsOr} from "@lenscape/errors";
 import {LlmSelector} from "@lenscape/llmselector";
-import {AgentCard, BaseMessage, executePipeline, ExecutePipelineResult, paramsFrom, PipelineDetailsData} from "@lenscape/agents";
+import {AgentCard, BaseMessage, ContextAndSelected, executePipeline, ExecutePipelineResult, paramsFrom, PipelineDetailsData} from "@lenscape/agents";
 import {delay} from "@lenscape/time";
 import {Context} from "./cards";
 import {allExecutors} from "./agent.config";
@@ -78,7 +78,7 @@ export function MultipleAgentQuestions({questions, questionOps}: MultipleAgentQu
                     res => {
                         setAnswers(old => ({
                             ...old,
-                            [question]: isValue<string>(res) ? res.value : 'Error: ' + res.errors
+                            [question]: isValue<ContextAndSelected<Context>>(res) ? res.value.selected : 'Error: ' + res.errors
                         }))
                     })
                 await delay(500)
@@ -125,11 +125,11 @@ export function MessageDisplay({pipeline}: { pipeline: ExecutePipelineResult<Con
                             {msg.role}
                         </td>
                         <td style={{borderBottom: '1px solid #eee', padding: '8px'}}>
-                                <div style={{whiteSpace: 'pre-wrap'}}>
-                                    {msg.content.trim().split('\n\n').map((para, idx) => (
-                                        <p key={idx} style={{margin: '0 0 1em 0'}}>{para}</p>
-                                    ))}
-                                </div>
+                            <div style={{whiteSpace: 'pre-wrap'}}>
+                                {msg.content.trim().split('\n\n').map((para, idx) => (
+                                    <p key={idx} style={{margin: '0 0 1em 0'}}>{para}</p>
+                                ))}
+                            </div>
 
                         </td>
                     </tr>
@@ -142,7 +142,7 @@ export function MessageDisplay({pipeline}: { pipeline: ExecutePipelineResult<Con
 }
 
 export function WhichAgent({questions, questionOps, mainQueryOps}: AppChildProps) {
-    const [resp, setResp] = useState<ErrorsOr<string>>({value: 'loading...'})
+    const [resp, setResp] = useState<ErrorsOr<ContextAndSelected<Context>>>({value: 'loading...'} as any)
     const query = mainQueryOps[0]
     const selector = useSelectorFn()
     const agents = useAgentCards()
@@ -153,7 +153,7 @@ export function WhichAgent({questions, questionOps, mainQueryOps}: AppChildProps
     const [agent, setAgent] = useState<ErrorsOr<AgentCard<any, any>>>({} as any)
     const [pipelines, setPipelines] = useState<ExecutePipelineResult<Context>>({} as any);
     useEffect(() => {
-        setResp({value: 'loading...'})
+        setResp({value: 'loading...'} as any)
         const start = new Date().getTime()
         setAgent({} as any)
         setPipelines({} as any)
@@ -164,7 +164,7 @@ export function WhichAgent({questions, questionOps, mainQueryOps}: AppChildProps
                 setLatency((new Date().getTime() - start))
                 const newAgent = mapErrorsOr(res,
                     agent => {
-                        const newAgent = agents.cards[agent] || {} as AgentCard<any, any>
+                        const newAgent = agents.cards[agent.selected] || {} as AgentCard<any, any>
                         const data: PipelineDetailsData<Context> = {
                             context: {query},
                             messages: [{role: 'user', content: query}],

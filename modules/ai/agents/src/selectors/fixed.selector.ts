@@ -8,8 +8,8 @@ export type FixedSelector = {
 }
 
 export const fixedSelector: SelectorFn<any, FixedSelector> = {
-    execute: async (selector) => ({
-        value: selector.select,
+    execute: async (selector, context) => ({
+        value: {context, selected: selector.select},
         log: {whatHappened: 'fixed.select', params: selector.select}
     })
 }

@@ -2,7 +2,7 @@ import {HasType} from "../agent.card";
 import {BaseMessage} from "../messages";
 import {LogAnd} from "../log.options";
 import {ErrorsOr} from "@lenscape/errors";
-import {SelectorFn, SelectorFns} from "./selectorFn";
+import {ContextAndSelected, SelectorFn, SelectorFns} from "./selectorFn";
 
 
 export type ChainSelector<Context, Selector> = {
@@ -19,7 +19,7 @@ export function chainSelector<Context, Selector extends HasType>(selFns: Selecto
                 const selFn = selFns[sel.type];
                 return selFn && (!selFn.isDefinedAt || selFn.isDefinedAt(sel, context, messages));
             }),
-        execute: async (selector: ChainSelector<Context, Selector>, context: Context, messages: BaseMessage[]): Promise<LogAnd<ErrorsOr<string>>> => {
+        execute: async (selector: ChainSelector<Context, Selector>, context: Context, messages: BaseMessage[]): Promise<LogAnd<ErrorsOr<ContextAndSelected<Context>>>> => {
             for (const sel of selector.chain) {
                 const type = sel.type;
                 const selFn = selFns[type];

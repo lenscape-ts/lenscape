@@ -2,13 +2,8 @@
 
 import { EigenvalueDecomposition, Matrix } from 'ml-matrix';
 import { LabeledVector } from './labeledVector';
+import {ProjectedPoint} from "./tsne";
 
-export interface ProjectedPoint {
-    id: string;
-    label: number;
-    x: number;
-    y: number;
-}
 
 /**
  * Reduces high-dimensional vectors to 2D using PCA.

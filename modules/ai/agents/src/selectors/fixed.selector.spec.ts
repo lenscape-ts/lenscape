@@ -11,10 +11,13 @@ describe('fixedSelector', () => {
 
         const result = await fixedSelector.execute(selector, {}, []);
         expect(result).toEqual({
-            value: 'billingAgent',
-            log: {
-                whatHappened: 'fixed.select',
-                params: 'billingAgent'
+            "log": {
+                "params": "billingAgent",
+                "whatHappened": "fixed.select"
+            },
+            "value": {
+                "context": {},
+                "selected": "billingAgent"
             }
         });
     });
@@ -27,10 +30,13 @@ describe('fixedSelector', () => {
 
         const result = await fixedSelector.execute(selector, {}, []);
         expect(result).toEqual({
-            value: 'technicalSupportAgent',
-            log: {
-                whatHappened: 'fixed.select',
-                params: 'technicalSupportAgent'
+            "log": {
+                "params": "technicalSupportAgent",
+                "whatHappened": "fixed.select"
+            },
+            "value": {
+                "context": {},
+                "selected": "technicalSupportAgent"
             }
         });
     });
@@ -44,10 +50,13 @@ describe('fixedSelector', () => {
 
         const result = await fixedSelector.execute(selector, {}, []);
         expect(result).toEqual({
-            value: 'accountAgent',
-            log: {
-                whatHappened: 'fixed.select',
-                params: 'accountAgent'
+            "log": {
+                "params": "accountAgent",
+                "whatHappened": "fixed.select"
+            },
+            "value": {
+                "context": {},
+                "selected": "accountAgent"
             }
         });
     });

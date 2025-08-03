@@ -1,4 +1,4 @@
-import {AgentCard, BaseMessage, defaultDereferenceMessages, DereferenceMessages, LogAnd, LookupMessages, SelectorFn} from "@lenscape/agents";
+import {AgentCard, BaseMessage, ContextAndSelected, defaultDereferenceMessages, DereferenceMessages, LogAnd, LookupMessages, SelectorFn} from "@lenscape/agents";
 import {ErrorsOr, isErrors} from "@lenscape/errors";
 import {AiClients} from "@lenscape/aiclient";
 import {NameAnd} from "@lenscape/records";
@@ -15,7 +15,7 @@ export type LlmSelector = {
 export const llmSelector = <Context, Pipeline>(aiClients: AiClients, cards: NameAnd<AgentCard<Context, Pipeline>>, lookup: LookupMessages,
                                                deref: DereferenceMessages<any> = defaultDereferenceMessages): SelectorFn<Context, LlmSelector> => ({
     //note no isDefinedAt which defaults to true
-    execute: async (selector, context: Context, messages: BaseMessage[]): Promise<LogAnd<ErrorsOr<string>>> => {
+    execute: async (selector, context: Context, messages: BaseMessage[]): Promise<LogAnd<ErrorsOr<ContextAndSelected<Context>>>> => {
         const mainAgentEntries = Object.entries(cards).filter(([name, card]) => card.main !== false);
         const agentPurposes = mainAgentEntries.map(([name, card]) => `${name}: ${card.purpose}`).join('\n');
         const agentNames = mainAgentEntries.map(([name, card]) => name).sort();
@@ -35,7 +35,7 @@ ${card.purpose}. Sample questions: ${card.samples.map(q => `" - ${q}"`).join('\n
         const lastMessage = response[response.length - 1];
         const lastContent = lastMessage.content.trim();
         return {
-            value: lastContent,
+            value: {selected: lastContent, context},
             log: {whatHappened: 'llm.selector.agent.selected', params: JSON.stringify(promptMessages, null, 2)}
         }
     }

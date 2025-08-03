@@ -20,6 +20,7 @@ export const executeLlmPipelineDetails = <Context>(aiClients: AiClients, lookup:
 
         const llmMessages = [...prefixMessages.value, ...messages];
         const response = await aiClient(llmMessages)
-        const result = {value: {context, messages: [...messages, ...response.map(({content, role}) => ({role, content}))]}, log: 'executedLlmPipelineDetails'}
+        const result = {value: {context, messages: [...messages, ...response.map(({content, role}) => ({role, content}))]},
+            log: {whatHappened: 'executedLlmPipelineDetails', params: [...llmMessages, response].map(m => JSON.stringify(m))}}
         return result
     }

@@ -4,13 +4,14 @@ import {RagPipelineDetails} from "@lenscape/rag_agents";
 import {RagIndexLlm} from "@lenscape/rag_agents";
 import {LlmSelector} from "@lenscape/llmselector";
 import {KeywordSelector} from "@lenscape/agents";
+import {TranslateContext, TranslatePipelineDetails} from "@lenscape/llm_agents";
 
-export type Context = ContextWithQuery & HasLastSelected
-export type Pipelines = LlmPipelineDetails | RagPipelineDetails | RagIndexLlm<any>
+export type Context = ContextWithQuery & HasLastSelected & TranslateContext
+export type Pipelines = LlmPipelineDetails | RagPipelineDetails | RagIndexLlm<any> |TranslatePipelineDetails
 export type Selector = FixedSelector | ChainSelector<Context, any> | LlmSelector | KeywordSelector
 
 export const apps: AgentCard<Context, Pipelines> = {
-    purpose: 'This agent answers questions about apps that have been installed on the system. These are general apps, room booking apps, timesheet management, general office work and productivity apps.',
+    purpose: 'This agent answers questions about apps that have been installed on the system. These are general apps, room booking apps, timesheet management, general office work and productivity apps. If the question explicitly mentions apps, this is the agent to use.',
     samples: [
         'How can I fill in my timesheet?',
         'How can I book a meeting room?',
@@ -53,7 +54,7 @@ export const generalCompany: AgentCard<Context, Pipelines> = {
         rag: {
             type: "rag",
             source: 'es',
-            indices: ['semantic-azureblob-prod'],
+            indices: ['semantic-azureblob-prod','office-buddy-prod'],
             top: 3,
         },
         llm: {
@@ -82,10 +83,14 @@ export const itsm: AgentCard<Context, Pipelines> = {
     ],
     tags: ['itsm'],
     pipeline: {
+        translate: {
+            type: 'translate',
+            agent: 'azureai',
+        },
         rag: {
             type: "rag",
             source: 'es',
-            indices: ['semantic-azureblob-prod'],
+            indices: ['semantic-kb-servicenow-prod2'],
             top: 3,
         },
         llm: {
@@ -166,7 +171,7 @@ A RAG search has been performed on the question and the top 3 results are provid
 }
 
 export const agentCards: AgentCards<Context, Pipelines, Selector> = {
-    cards: {apps, generalCompany, itsm, myGenius,jira},
+    cards: {apps, generalCompany, itsm, myGenius, jira},
     selector: {
         type: 'llm',
         model: 'azureai',

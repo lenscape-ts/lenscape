@@ -25,7 +25,7 @@ export const executeRagPipelineDetails = <Context extends ContextWithQuery>(rags
         if (!rag) return {errors: [`Unknown rag source ${source}. Legal values are ${Object.keys(rags).sort()}`], log: {whatHappened: 'Rag function unknown source ', params: source, severity: 'error'}}
         const ragMessages = await rag(context.query, indices, top);
         if (isErrors(ragMessages)) return {...ragMessages, log: {whatHappened: 'Rag function failed', severity: 'error'}};
-        return {value: {context, messages: [...messages, ...ragMessages.value]}}
+        return {value: {context, messages: [...messages, ...ragMessages.value]}, log: {whatHappened:'rag', params: [source, indices.join(','), top.toString(), context.query]}};
     }
 
 

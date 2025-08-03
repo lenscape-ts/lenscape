@@ -38,7 +38,10 @@ describe('keywordSelector', () => {
         expect(keywordSelector.isDefinedAt!(selector, {}, messages)).toEqual(true);
         const result = await keywordSelector.execute(selector, {}, messages);
         expect(result).toEqual({
-            value: 'supportAgent'
+            "value": {
+                "context": {},
+                "selected": "supportAgent"
+            }
         });
     });
 

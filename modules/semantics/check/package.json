@@ -27,6 +27,7 @@
     "@lenscape/azureai": "0.1.2",
     "@lenscape/llmselector": "0.1.2",
     "@lenscape/rag_agents": "0.1.2",
+    "@lenscape/sample_agents": "0.1.2",
     "@mui/icons-material": "^5.15.10",
     "@mui/material": "^5.15.10",
     "axios": "1.7.2",
@@ -37,9 +38,11 @@
   "devDependencies": {
     "@babel/preset-env": "^7.24.7",
     "@babel/preset-react": "^7.24.7",
+    "@parcel/packager-raw-url": "2.15.4",
+    "@parcel/transformer-webmanifest": "2.15.4",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
-    "parcel": "^2.11.0",
+    "parcel": "^2.15.4",
     "parcel-reporter-static-files-copy": "^1.5.3",
     "typescript": "^5.3.3"
   },

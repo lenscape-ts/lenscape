@@ -10,6 +10,7 @@ import {AiClients} from "@lenscape/aiclient";
 import {defaultOpenAiConfig, openAiClient} from "@lenscape/openai";
 import {azureOpenAiClient, defaultAzureAiConfig} from "@lenscape/azureai";
 import {llmSelector} from "@lenscape/llmselector";
+import {executeTranslatePipelineDetails} from "@lenscape/llm_agents/src/translate.pipeline";
 
 
 export const aiClients = (axios: AxiosStatic, env: Env, apiKey: string): AiClients => ({
@@ -26,7 +27,8 @@ export const rags: RagFns = {
 export const allExecutors: PipelineExecutors<Context> = {
     rag: executeRagPipelineDetails(rags),
     llm: executeLlmPipelineDetails(ai, lookups),
-    'rag.index.llm': executeRagIndexLlm(ai, lookups)
+    'rag.index.llm': executeRagIndexLlm(ai, lookups),
+    'translate': executeTranslatePipelineDetails(ai, lookups)
 }
 export const llmSel = llmSelector<Context, Pipelines>(aiClients(axios, {}, azureAiToken),
     agentCards.cards,

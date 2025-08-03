@@ -22,6 +22,6 @@ export const keywordSelector: SelectorFn<any, KeywordSelector> = {
     isDefinedAt: (selector, context, messages) => find(selector.keywords, messages),
     execute: async (selector, context, messages) =>
         find(selector.keywords, messages)
-            ? {value: selector.select}
+            ? {value: {selected:selector.select, context}}
             : {errors: [`No keyword found in the last message. Expected one of ${selector.keywords}`], log: {whatHappened: 'selector.keyword.execute', severity: 'error'}}
 }

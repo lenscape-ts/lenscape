@@ -5,14 +5,9 @@ import {defaultAzureAiConfig, azureOpenAiClient, AzureAiConfig} from './azure.ai
 
 describe('azureOpenAiClient', () => {
     const mockAxios = new MockAdapter(axios);
-    const env = {
-        AZURE_OPENAI_TOKEN: 'test-token',
-        AZURE_OPENAI_DEPLOYMENT_ID: 'gpt-test',
-        AZURE_OPENAI_API_VERSION: '2024-02-15-preview',
-    };
 
     const baseURL = 'https://my-resource.openai.azure.com';
-    const config: AzureAiConfig = defaultAzureAiConfig(axios, baseURL, env);
+    const config: AzureAiConfig = defaultAzureAiConfig(axios, baseURL, 'test-token')
     const client = azureOpenAiClient(config);
 
     const messages: BaseMessage[] = [{role: 'user', content: 'Hello, Azure!'}];
@@ -92,7 +87,8 @@ describe('azureOpenAiClient', () => {
     test('logs debug info when debug is enabled', async () => {
         const debugConfig: AzureAiConfig = {...config, debug: true};
         const debugClient = azureOpenAiClient(debugConfig);
-        const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+        const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {
+        });
         mockAxios.onPost(/\/chat\/completions/).reply(200, {
             choices: [{message: {role: 'assistant', content: 'Debug mode'}}]
         });
